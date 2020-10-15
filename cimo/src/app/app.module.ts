@@ -80,6 +80,8 @@ import { DashboardComponent } from './dashboard/dashboard.component';
 import { AdminComponent } from './dashboard/admin/admin.component';
 import { DoctorComponent } from './dashboard/doctor/doctor.component';
 import { PacientComponent } from './dashboard/pacient/pacient.component';
+import { ChatfrontendComponent } from './cimo/chatfrontend/chatfrontend.component';
+import { VideoconferencefrontendComponent } from './cimo/videoconferencefrontend/videoconferencefrontend.component';
 
 @NgModule({
   declarations: [
@@ -107,7 +109,9 @@ import { PacientComponent } from './dashboard/pacient/pacient.component';
     DashboardComponent,
     AdminComponent,
     DoctorComponent,
-    PacientComponent
+    PacientComponent,
+    ChatfrontendComponent,
+    VideoconferencefrontendComponent
   ],
   imports: [
     BrowserModule,

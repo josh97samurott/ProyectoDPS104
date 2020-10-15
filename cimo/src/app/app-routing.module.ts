@@ -9,8 +9,8 @@ import { DoctorComponent } from '../app/dashboard/doctor/doctor.component';
 import { PacientComponent } from '../app/dashboard/pacient/pacient.component';
 import { PrincipalpageComponent } from './principalpage/principalpage.component';
 import { SitePoliciesComponent } from './site-policies/site-policies.component';
-import { ChatComponent } from './cimo/chat/chat.component'; 
-import { VideoconferencesComponent } from './cimo/videoconferences/videoconferences.component';
+import { ChatfrontendComponent } from './cimo/chatfrontend/chatfrontend.component';
+import { VideoconferencefrontendComponent } from './cimo/videoconferencefrontend/videoconferencefrontend.component';
 
 const routes: Routes = [
   { path: 'log-in', component: LogInComponent, pathMatch: 'full' }, //Los siguientes son de plantillas
@@ -20,8 +20,8 @@ const routes: Routes = [
   { path: 'pacientdashboard', component: PacientComponent, pathMatch: 'full' },
   { path: 'inicio', component: PrincipalpageComponent },
   { path: 'politicas', component: SitePoliciesComponent },
-  { path: 'chat', component: ChatComponent },
-  { path: 'videoconferences', component: VideoconferencesComponent }
+  { path: 'chat-frontend', component: ChatfrontendComponent },
+  { path: 'videoconferences-frontend', component: VideoconferencefrontendComponent }
 ];
 
 @NgModule({
