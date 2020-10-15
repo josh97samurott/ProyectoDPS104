@@ -1,22 +1,22 @@
 
 <app-header></app-header>
 
-<mat-card style="min-width: 650px; width: 60%; margin: 0 auto; margin-top: 2%; text-align: center;" class="color-white-blue">
+<mat-card style="min-wth: 650px; width: 60%; margin: 0 auto; margin-top: 2%; text-align: center;" class="color-white-blue">
     <br/>
     <mat-card-title style="color: black;">
         <h1>Inicio de sesión</h1>
     </mat-card-title>
     <br/><br/>
     <mat-card-content>
-        <form class="example-form" style="margin: 0 auto; font-size: 20px;">
+        <form #loginForm="ngForm" (ngSubmit)="logIn(loginForm)" class="example-form" style="margin: 0 auto; font-size: 20px;">
             <mat-form-field class="example-full-width">
               <mat-label >Ingrese su usuario</mat-label>
-              <input matInput type="text" placeholder="Ingrese su usuario" required autofocus autocomplete="off">
+              <input matInput name="_username" #_username="ngModel" [(ngModel)]="username" type="text" placeholder="Ingrese su usuario" required autofocus autocomplete="off">
             </mat-form-field>
             <br>
             <mat-form-field class="example-full-width">
               <mat-label >Ingrese su contraseña</mat-label>
-              <input matInput type="password" placeholder="Ingrese su contraseña"  required>
+              <input matInput name="_password" #_password="ngModel" [(ngModel)]="password" type="password" placeholder="Ingrese su contraseña"  required>
             </mat-form-field>
 
             <button mat-button style="background-color: white; width: 90%;">
@@ -29,7 +29,8 @@
             <p style="font-size: 16px;">¿No estas registrado? <a style="color: blue;">Clic aquí</a></p>
 
         </form>
-        <br/>
+        <br/><br/>
+        
     </mat-card-content>
 </mat-card>
 

@@ -1,5 +1,6 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
+import { FormsModule } from '@angular/forms';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -71,6 +72,14 @@ import { FrequentQuestionsComponent } from './frequent-questions/frequent-questi
 import { TechnicalSupportComponent } from './technical-support/technical-support.component';
 
 
+//Services
+import { HttpClientModule } from '@angular/common/http';
+import { LogInService } from '../app/Service/log-in.service';
+import { DashboardComponent } from './dashboard/dashboard.component';
+import { AdminComponent } from './dashboard/admin/admin.component';
+import { DoctorComponent } from './dashboard/doctor/doctor.component';
+import { PacientComponent } from './dashboard/pacient/pacient.component';
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -93,7 +102,11 @@ import { TechnicalSupportComponent } from './technical-support/technical-support
     PaymentComponent,
     SitePoliciesComponent,
     FrequentQuestionsComponent,
-    TechnicalSupportComponent
+    TechnicalSupportComponent,
+    DashboardComponent,
+    AdminComponent,
+    DoctorComponent,
+    PacientComponent
   ],
   imports: [
     BrowserModule,
@@ -141,9 +154,12 @@ import { TechnicalSupportComponent } from './technical-support/technical-support
     MatTreeModule,
     OverlayModule,
     PortalModule,
-    ScrollingModule
+    ScrollingModule,
+    HttpClientModule,
+    BrowserAnimationsModule,
+    FormsModule
   ],
-  providers: [],
+  providers: [ LogInService ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
