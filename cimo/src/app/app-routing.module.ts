@@ -13,6 +13,7 @@ import { ChatfrontendComponent } from './cimo/chatfrontend/chatfrontend.componen
 import { VideoconferencefrontendComponent } from './cimo/videoconferencefrontend/videoconferencefrontend.component';
 import { PaymentComponent } from './payment/payment.component';
 import { PayrollComponent } from './payroll/payroll.component';
+import { StatisticalComponent } from './statistical/statistical.component';
 
 const routes: Routes = [
   { path: 'log-in', component: LogInComponent, pathMatch: 'full' }, //Los siguientes son de plantillas
@@ -25,7 +26,8 @@ const routes: Routes = [
   { path: 'chat-frontend', component: ChatfrontendComponent },
   { path: 'videoconferences-frontend', component: VideoconferencefrontendComponent },
   { path: 'payment', component: PaymentComponent},
-  { path: 'payroll', component: PayrollComponent}
+  { path: 'payroll', component: PayrollComponent},
+  { path: 'statistical', component: StatisticalComponent }
 ];
 
 @NgModule({
