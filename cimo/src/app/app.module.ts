@@ -141,7 +141,8 @@ import { TechnicalSupportComponent } from './technical-support/technical-support
     MatTreeModule,
     OverlayModule,
     PortalModule,
-    ScrollingModule
+    ScrollingModule,
+    BrowserAnimationsModule
   ],
   providers: [],
   bootstrap: [AppComponent]

@@ -5,6 +5,7 @@ import { Routes, RouterModule } from '@angular/router';
 import { LogInComponent } from '../app/log-in/log-in.component';
 import { HeaderComponent } from '../app/templates/header/header.component';
 
+
 const routes: Routes = [
   { path: 'log-in', component: LogInComponent }, //Los siguientes son de plantillas
   { path: 'header', component: HeaderComponent }
