@@ -1,1 +1,43 @@
-<p>chat works!</p>
+<!-- 
+    //import { ChatComponent } from './cimo/chat/chat.component'; Agregados por Will
+//import { VideoconferencesComponent } from './cimo/videoconferences/videoconferences.component'; Agregados por Will
+//Las dos lineas de arriba es para que no haya problema al compilar chat y videoconferences de cimo/...
+
+//{ path: 'chat', component: ChatComponent }, Agregador por Will
+  //{ path: 'videoconferences', component: VideoconferencesComponent } Agregados por Will
+
+  
+import { ChatComponent } from './cimo/chat/chat.component';
+import { VideoconferencesComponent } from './cimo/videoconferences/videoconferences.component';
+-->
+<app-header></app-header>
+
+<mat-card style="min-width: 650px; width: 60%; margin: 0 auto; margin-top: 2%; text-align: center;" class="color-white-blue">
+    <br/>
+    <mat-card-title style="color: black;">
+        <h1>Chat de consultas</h1>
+    </mat-card-title>
+    <br/><br/>
+    <mat-card-content>
+        <form class="example-form" style="margin: 0 auto; font-size: 20px;">
+            <div class="example-container">
+                <h3>Ud está chateando con el doctor: Nombre aquí desde DB</h3>
+                <br>
+                <div style="border-color:blueviolet; border-style: solid; border-radius: 10px;">
+                    <mat-form-field appearance="fill" style="width: 100%; height: 0%;">
+                        <mat-label></mat-label>
+                        <textarea matInput disabled></textarea>
+                      </mat-form-field>
+                </div>
+                  <br>
+                <mat-form-field style="margin-right: 10px; width: 75%;">
+                    <input matInput type="text" placeholder="Su mensaje aquí" required autofocus autocomplete="off">
+                  </mat-form-field>
+                <button mat-raised-button color="primary" type="submit" style="width: 20%;">Enviar<mat-icon aria-hidden="false" aria-label="Example home icon" style="margin-left: 10px;">send</mat-icon></button>
+            </div>
+            
+
+        </form>
+        <br/>
+    </mat-card-content>
+</mat-card>

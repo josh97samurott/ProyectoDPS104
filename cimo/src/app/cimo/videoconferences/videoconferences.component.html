@@ -1,1 +1,57 @@
-<p>videoconferences works!</p>
+
+<app-header></app-header>
+
+<mat-card style="min-width: 650px; width: 60%; margin: 0 auto; margin-top: 2%; text-align: center;" class="color-white-blue">
+    <br/>
+    <mat-card-title style="color: black;">
+        <h1>Programar videoconferencia</h1>
+    </mat-card-title>
+    <br/><br/>
+    <mat-card-content>
+        <form class="example-form" style="margin: 0 auto; font-size: 20px;">
+            <mat-form-field appearance="fill">
+                <mat-label>Elija fecha deseada</mat-label>
+                <input matInput [matDatepicker]="picker">
+                <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+                <mat-datepicker #picker></mat-datepicker>
+            </mat-form-field>
+            <br>
+            <mat-form-field>
+                <input matInput type="text" placeholder="Hora inicio" required autofocus autocomplete="off">
+            </mat-form-field>
+            <br>
+            <h3>Escoja duración de videoconferencia</h3>
+              <mat-form-field appearance="fill">
+                <mat-label>Desplegar horas</mat-label>
+                <mat-select>
+                  <mat-option *ngFor="let item of lista" [value]="item">
+                    {{item}}
+                  </mat-option>
+                </mat-select>
+              </mat-form-field>
+              <br>
+            <mat-form-field class="example-full-width">
+                <mat-label >Ingrese link de conferencia</mat-label>
+                <input matInput type="text" placeholder="Ingrese link" required autofocus autocomplete="off">
+              </mat-form-field>
+
+              <h3>Elija el doctor con quién desea conversar</h3>
+              <mat-form-field appearance="fill">
+                <mat-label>Doctores</mat-label>
+                <mat-select>
+                  <mat-option>
+                    <!-- {{Cargar doctores aquí}} Usando ngFor-->
+                  </mat-option>
+                </mat-select>
+              </mat-form-field>
+            <br/><br/>
+            <div class="example-button-row">
+                <button mat-raised-button color="primary" type="submit" style="width: 40%; margin-right: 10px;">Programar</button>
+                <button mat-raised-button color="primary" type="submit" style="width: 40%;">Regresar</button>
+              </div>
+            
+
+        </form>
+        <br/>
+    </mat-card-content>
+</mat-card>
