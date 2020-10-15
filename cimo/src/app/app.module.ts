@@ -83,6 +83,16 @@ import { PacientComponent } from './dashboard/pacient/pacient.component';
 import { SidenavComponent } from './templates/sidenav/sidenav.component';
 import { ChatfrontendComponent } from './cimo/chatfrontend/chatfrontend.component';
 import { VideoconferencefrontendComponent } from './cimo/videoconferencefrontend/videoconferencefrontend.component';
+import {ReactiveFormsModule} from '@angular/forms';
+
+import {platformBrowserDynamic} from '@angular/platform-browser-dynamic';
+import {MAT_FORM_FIELD_DEFAULT_OPTIONS} from '@angular/material/form-field';
+import { DialogComponent } from './payroll/dialog/dialog.component';
+
+
+
+
+
 
 @NgModule({
   declarations: [
@@ -113,7 +123,8 @@ import { VideoconferencefrontendComponent } from './cimo/videoconferencefrontend
     PacientComponent,
     SidenavComponent,
     ChatfrontendComponent,
-    VideoconferencefrontendComponent
+    VideoconferencefrontendComponent,
+    DialogComponent
   ],
   imports: [
     BrowserModule,
@@ -164,7 +175,9 @@ import { VideoconferencefrontendComponent } from './cimo/videoconferencefrontend
     ScrollingModule,
     HttpClientModule,
     BrowserAnimationsModule,
-    FormsModule
+    FormsModule,
+    ReactiveFormsModule,
+    MatNativeDateModule
   ],
   providers: [ LogInService ],
   bootstrap: [AppComponent]
