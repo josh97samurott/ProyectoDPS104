@@ -1,20 +1,20 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { VideoconferencesComponent } from './videoconferences.component';
+import { ChatfrontendComponent } from './chatfrontend.component';
 
-describe('VideoconferencesComponent', () => {
-  let component: VideoconferencesComponent;
-  let fixture: ComponentFixture<VideoconferencesComponent>;
+describe('ChatfrontendComponent', () => {
+  let component: ChatfrontendComponent;
+  let fixture: ComponentFixture<ChatfrontendComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ VideoconferencesComponent ]
+      declarations: [ ChatfrontendComponent ]
     })
     .compileComponents();
   });
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(VideoconferencesComponent);
+    fixture = TestBed.createComponent(ChatfrontendComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

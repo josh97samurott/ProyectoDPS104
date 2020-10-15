@@ -81,6 +81,8 @@ import { AdminComponent } from './dashboard/admin/admin.component';
 import { DoctorComponent } from './dashboard/doctor/doctor.component';
 import { PacientComponent } from './dashboard/pacient/pacient.component';
 import { SidenavComponent } from './templates/sidenav/sidenav.component';
+import { ChatfrontendComponent } from './cimo/chatfrontend/chatfrontend.component';
+import { VideoconferencefrontendComponent } from './cimo/videoconferencefrontend/videoconferencefrontend.component';
 
 @NgModule({
   declarations: [
@@ -109,7 +111,9 @@ import { SidenavComponent } from './templates/sidenav/sidenav.component';
     AdminComponent,
     DoctorComponent,
     PacientComponent,
-    SidenavComponent
+    SidenavComponent,
+    ChatfrontendComponent,
+    VideoconferencefrontendComponent
   ],
   imports: [
     BrowserModule,
