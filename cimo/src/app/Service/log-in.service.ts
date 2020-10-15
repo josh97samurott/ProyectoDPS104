@@ -1,18 +1,19 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { User } from '../Model/user';
+import { Userlogin } from '../Model/userlogin';
 
 @Injectable({
   providedIn: 'root'
 })
 export class LogInService {
 
-  user:User;
+  url='http://localhost/ProyectoDPS104/backendcimo/';
+
+  
   constructor(private http:HttpClient) { }
 
-  Url='http://localhost:8080/backendcimo/log-in';
-
-  getUser(){
-    return this.http.get<User[]>(this.Url);
+  recoveryDataUser(username:string, password:string){
+    return this.http.get(`${this.url}log_in?username=${username}&password=${password}`);
   }
+
 }
