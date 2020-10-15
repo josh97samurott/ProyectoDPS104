@@ -11,6 +11,8 @@ import { PrincipalpageComponent } from './principalpage/principalpage.component'
 import { SitePoliciesComponent } from './site-policies/site-policies.component';
 import { ChatfrontendComponent } from './cimo/chatfrontend/chatfrontend.component';
 import { VideoconferencefrontendComponent } from './cimo/videoconferencefrontend/videoconferencefrontend.component';
+import { PaymentComponent } from './payment/payment.component';
+import { PayrollComponent } from './payroll/payroll.component';
 
 const routes: Routes = [
   { path: 'log-in', component: LogInComponent, pathMatch: 'full' }, //Los siguientes son de plantillas
@@ -21,7 +23,9 @@ const routes: Routes = [
   { path: 'inicio', component: PrincipalpageComponent },
   { path: 'politicas', component: SitePoliciesComponent },
   { path: 'chat-frontend', component: ChatfrontendComponent },
-  { path: 'videoconferences-frontend', component: VideoconferencefrontendComponent }
+  { path: 'videoconferences-frontend', component: VideoconferencefrontendComponent },
+  { path: 'payment', component: PaymentComponent},
+  { path: 'payroll', component: PayrollComponent}
 ];
 
 @NgModule({

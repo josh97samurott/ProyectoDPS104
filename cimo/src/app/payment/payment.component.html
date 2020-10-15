@@ -1,1 +1,72 @@
-<p>payment works!</p>
+
+<app-header></app-header>
+
+<mat-vertical-stepper [linear]="isLinear" #stepper>
+  <mat-step [stepControl]="firstFormGroup">
+    <form [formGroup]="firstFormGroup">
+      <ng-template matStepLabel>Complete su información</ng-template>
+
+      <mat-form-field>
+        <mat-label>Nombre</mat-label>
+        <input matInput placeholder="Nombre" formControlName="name" required>
+      </mat-form-field>
+
+      <mat-form-field>
+        <mat-label>Apellido</mat-label>
+        <input matInput placeholder="Apellido" formControlName="lastname" required>
+      </mat-form-field>
+
+      <mat-form-field>
+        <mat-label>Telefono</mat-label>
+        <input matInput placeholder="1111-9999" formControlName="phone" required>
+      </mat-form-field>
+      <div>
+        <button mat-button matStepperNext>Siguiente</button>
+      </div>
+    </form>
+  </mat-step>
+
+
+  <mat-step [stepControl]="secondFormGroup">
+    <form [formGroup]="secondFormGroup">
+      <ng-template matStepLabel>Complete su informacion de pago</ng-template>
+      <mat-form-field>
+        <mat-label>Documento Unico de Identidad</mat-label>
+        <input matInput formControlName="dui" placeholder="1234567-8"
+               required>
+      </mat-form-field>
+
+      <mat-form-field>
+        <mat-label>Tarjeta credito/debito</mat-label>
+        <input matInput formControlName="tarjeta" placeholder="1234-1234-1234-1234"
+               required>
+      </mat-form-field>
+
+      <mat-form-field>
+        <mat-label>Codigo de seguridad</mat-label>
+        <input matInput placeholder="123" formControlName="cvv" required>
+      </mat-form-field>
+
+      <mat-form-field appearance="fill">
+        <mat-label>Seleccione la fecha de vencimiento</mat-label>
+        <input matInput [matDatepicker]="picker" formControlName="fecha_exp" required>
+        <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+        <mat-datepicker #picker></mat-datepicker>
+      </mat-form-field>
+
+
+      <div>
+        <button mat-button matStepperPrevious>Regresa</button>
+        <button mat-button matStepperNext>Siguiente</button>
+      </div>
+    </form>
+  </mat-step>
+  <mat-step>
+    <ng-template matStepLabel>Finalizacion</ng-template>
+    <p>Pago completado.</p>
+    <div>
+      <button mat-button matStepperPrevious>Regresar</button>
+      <button mat-button (click)="stepper.reset()">Aceptar</button>
+    </div>
+  </mat-step>
+</mat-vertical-stepper>
