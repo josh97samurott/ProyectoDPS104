@@ -1,8 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { NgForm } from '@angular/forms';
-import { LogInService } from '../Service/log-in.service';
+import { ServiceService } from '../Service/service.service';
 import { HttpClient } from '@angular/common/http';
-import { Userlogin } from '../Model/userlogin';
 import { Router } from '@angular/router';
 
 @Component({
@@ -16,21 +15,21 @@ export class LogInComponent implements OnInit {
   public password:string;
   public message:string;
 
-  constructor(private loginService:LogInService, private router:Router) { }
+  constructor(private service:ServiceService, private router:Router) { }
 
   ngOnInit(){
-
   }
 
   logIn(loginForm: NgForm){
-    this.loginService.recoveryDataUser(this.username, this.password).subscribe(result => {
+    this.service.login(this.username, this.password).subscribe(result => {
       if(result['access'] == 1){
+        this.service.setTokenLogin(result["id"],result["username"], result["name"], result["lastname"], result["email"], result["role"], result["access"]);
         if(result["role"] == 0){
-          this.router.navigate(["admindashboard"]);
+          window.location.href = "/principalpage";
         }else if(result["role"] == 1){
-          window.location.href = "doctordashboard"
+          window.location.href = "/principalpage";
         }else if(result["role"] == 2){
-          this.router.navigate(["pacientdashboard"]);
+          window.location.href = "/principalpage";
         }
       }
       else{
@@ -38,6 +37,4 @@ export class LogInComponent implements OnInit {
       }
     });
   }
-
-
 }

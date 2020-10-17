@@ -1,4 +1,7 @@
 <?php
+header("Access-Control-Allow-Origin: *");
+header("Access-Control-Allow-Headers: Origin, X-Requested-With, Content-Type, Accept");
+
 defined('BASEPATH') OR exit('No direct script access allowed');
 
 class Backend extends CI_Controller {
@@ -6,60 +9,109 @@ class Backend extends CI_Controller {
 	public function __construct(){
 		parent::__construct();
 		$this->load->model("Login");
+		$this->load->model("Signup");
 	}
 
 	public function index()
 	{
-		if ( $this->session->userdata("id") !== null && $this->session->userdata("username") !== null && $this->session->userdata("name") !== null && $this->session->userdata("lastname") !== null && $this->session->userdata("email") !== null ){
-			
+
+	}
+
+	public function log_in(){
+		$username = $this->input->get("username");
+		$password = $this->input->get("password");
+
+		if($this->Login->log_in($username, $password)){
+			$data = $this->Login->save_session($username);
+
+			//role = 0 (Administracion)
+			//role = 1 (Doctor)
+			//role = 2 (Paciente)
+			$user_data = array( 	
+				'id' => $data["id"],
+				'username' => $data["username"],
+				'name' => $data["name"],
+				'lastname' => $data["lastname"],
+				'email' => $data["email"],
+				'role' => $data["role"]
+			);
+				
+			$data["json"] = $user_data;
+			$data["json"]["access"] = "1"; 
+				
+			$this->load->view("backend/json_log_in.php", $data);
 		}
 		else{
-			$this->load->view("log_in");
+			$data["json"] = array(
+				"access" => "0"
+			);
+
+			$this->load->view("backend/json_log_in.php", $data);
 		}
 	}
 
-
-	public function log_in(){
-		if ( $this->session->userdata("id") == null && $this->session->userdata("username") == null && $this->session->userdata("name") == null && $this->session->userdata("lastname") == null && $this->session->userdata("email") == null){
-			$username = $this->input->get("username");
-			$password = $this->input->get("password");
-
-			if($this->Login->log_in($username, $password)){
-				$data = $this->Login->save_session($username);
-
-				//role = 0 (Administracion)
-				//role = 1 (Doctor)
-				//role = 2 (Paciente)
-				$user_data = array( 	
-					'id' => $data["id"],
-					'username' => $data["username"],
-					'name' => $data["name"],
-					'lastname' => $data["lastname"],
-					'email' => $data["email"],
-					'role' => $data["role"]
+	public function sign_up(){
+		$JSONData = file_get_contents("php://input");
+		$dataObject = json_decode($JSONData);
+		/*$username = $this->input->post("username");
+		$password = $this->input->post("password");
+		$name = $this->input->post("name");
+		$lastname = $this->input->post("lastname");
+		$role = $this->input->post("role");
+		$email = $this->input->post("email");
+		$phone = $this->input->post("phone");
+		$nationality = $this->input->post("nationality");
+		$dui_or_passport = $this->input->post("dui_or_passport");*/
+		$username = $dataObject->username;
+		$password = $dataObject->password;
+		$name = $dataObject->name;
+		$lastname = $dataObject->lastname;
+		$role = $dataObject->role;
+		$email = $dataObject->email;
+		$phone = $dataObject->phone;
+		$nationality = $dataObject->nationality;
+		$dui_or_passport = $dataObject->dui_or_passport;
+		
+		if($role == 2){
+			if(isset($username)==true && isset($password)==true && isset($name)==true && isset($lastname)==true && isset($email)==true && isset($nationality)==true){
+				$data = array(
+					"username" => $username,
+					"password" => $password,
+					"name" => $name,
+					"lastname" => $lastname,
+					"role" => $role,
+					"email" => $email,
+					"phone" => $phone,
+					"nationality" => $nationality,
+					"dui_or_passport" => $dui_or_passport,
+					"creation_date" => date("d")."/".date("m")."/".date("Y"),
+					"confirm_email" => 0
 				);
-				
-				$this->session->set_userdata($user_data);
-				
-				$data["json"] = array(
-					"access" => "1",
-					'role' => $data["role"]
-				);
-				
-				$this->load->view("backend/json_log_in.php", $data);
+
+				if($this->Signup->sign_up($data)){
+					$data["json"] = array(
+						"access" => "1"
+					);
+				}
+				else{
+					$data["json"] = array(
+						"access" => "0"
+					);
+				}
+
+				$this->load->view("backend/json_sign_up.php", $data);
 			}
 			else{
 				$data["json"] = array(
 					"access" => "0"
 				);
 
-				$this->load->view("backend/json_log_in.php", $data);
+				$this->load->view("backend/json_sign_up.php", $data);
 			}
 		}
-		else{
-			$data["json"] = $this->session->userdata();
-			$this->load->view("backend/json_log_in.php", $data);
-			$this->session->sess_destroy();
+		else if($role == 1){
+
 		}
+
 	}
 }

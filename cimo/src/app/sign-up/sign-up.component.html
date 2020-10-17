@@ -1,1 +1,72 @@
-<p>sign-up works!</p>
+<mat-card style="min-wth: 650px; width: 60%; margin: 0 auto; margin-top: 2%; text-align: center;">
+    <br/>
+    <mat-card-title style="color: black;">
+        <h1>¡Crea tu cuenta!</h1>
+    </mat-card-title>
+    <br/><br/>
+    <mat-card-content>
+        
+        <h2>Seleccione el tipo de cuenta que desea crear</h2>
+
+            <mat-tab-group mat-stretch-tabs>
+                <mat-tab label="Crear cuenta de tipo paciente"> 
+                    <form class="example-form" #registerpacientForm="ngForm" (ngSubmit)="registerPacient(registerpacientForm)" style="margin: 0 auto; font-size: 16px;">
+                        <br/>
+                        <mat-form-field class="example-full-width">
+                            <mat-label >Usuario</mat-label>
+                            <input matInput name="_username" #_username="ngModel" [(ngModel)]="username" type="text" placeholder="Ingrese un nombre de usuario" required autocomplete="off">
+                        </mat-form-field>
+
+                        <mat-form-field class="example-full-width">
+                            <mat-label >Contraseña (Debe de contener letras y números)</mat-label>
+                            <input matInput name="_password" #_password="ngModel" [(ngModel)]="password" type="password" placeholder="Ingrese una contraseña" required autocomplete="off">
+                        </mat-form-field>
+
+                        <mat-form-field class="example-full-width">
+                            <mat-label >Comprobar contraseña</mat-label>
+                            <input matInput type="password" name="_confirmpassword" #_confirmpassword="ngModel" [(ngModel)]="confirmpassword" placeholder="Ingrese nuevamente la contraseña" required autocomplete="off">
+                        </mat-form-field>
+
+                        <mat-form-field class="example-full-width">
+                            <mat-label >Nombre</mat-label>
+                            <input matInput type="text" name="_name" #_name="ngModel" [(ngModel)]="name" placeholder="Ingrese su nombre" required autocomplete="off">
+                        </mat-form-field>
+
+                        <mat-form-field class="example-full-width">
+                            <mat-label >Apellido</mat-label>
+                            <input matInput type="text" name="_lastname" #_lastname="ngModel" [(ngModel)]="lastname" placeholder="Ingrese su apellido" required autocomplete="off">
+                        </mat-form-field>
+
+                        <mat-form-field class="example-full-width">
+                            <mat-label >Correo eléctronico</mat-label>
+                            <input matInput type="text" name="_email" #_email="ngModel" [(ngModel)]="email" placeholder="Ingrese su correo eléctronico" required autocomplete="off">
+                        </mat-form-field>
+
+                        <mat-form-field class="example-full-width">
+                            <mat-label >Número telefónico o celular</mat-label>
+                            <input matInput type="text" name="_phone" #_phone="ngModel" [(ngModel)]="phone" placeholder="Ingrese su número de contacto" autocomplete="off">
+                        </mat-form-field>
+
+                        <mat-form-field class="example-full-width">
+                            <mat-label>Nacionalidad</mat-label>
+                            <mat-select name="_nationality" #_nationality="ngModel" [(ngModel)]="nationality">
+                                <input (keyup)="onKey($event.target.value)">
+                                <mat-option>Ingrese su país de origen</mat-option>
+                                <mat-option *ngFor="let state of selectedStates" [value]="state">{{state}}</mat-option>
+                            </mat-select>
+                        </mat-form-field>
+
+                        <br/><br/>
+                        <button mat-raised-button color="primary" type="submit" style="width: 90%;">Registrar cuenta</button>
+                        <br/><br/>
+                    </form>
+
+                </mat-tab>
+
+                <mat-tab label="Crear cuenta de tipo doctor">  </mat-tab>
+            </mat-tab-group>
+    
+        <br/><br/>
+        
+    </mat-card-content>
+</mat-card>

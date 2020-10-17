@@ -2,14 +2,13 @@ import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 
+
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { LogInComponent } from './log-in/log-in.component';
 import { SignUpComponent } from './sign-up/sign-up.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { TemplatesComponent } from './templates/templates.component';
-import { HeaderComponent } from './templates/header/header.component';
-import { FooterComponent } from './templates/footer/footer.component';
+
 
 
 //Material and CDK
@@ -75,12 +74,12 @@ import { TechnicalSupportComponent } from './technical-support/technical-support
 
 //Services
 import { HttpClientModule } from '@angular/common/http';
-import { LogInService } from '../app/Service/log-in.service';
+import { ServiceService } from './Service/service.service';
+import { CookieService } from 'ngx-cookie-service';
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { AdminComponent } from './dashboard/admin/admin.component';
 import { DoctorComponent } from './dashboard/doctor/doctor.component';
 import { PacientComponent } from './dashboard/pacient/pacient.component';
-import { SidenavComponent } from './templates/sidenav/sidenav.component';
 import { ChatfrontendComponent } from './cimo/chatfrontend/chatfrontend.component';
 import { VideoconferencefrontendComponent } from './cimo/videoconferencefrontend/videoconferencefrontend.component';
 import {ReactiveFormsModule} from '@angular/forms';
@@ -88,10 +87,9 @@ import {ReactiveFormsModule} from '@angular/forms';
 import {platformBrowserDynamic} from '@angular/platform-browser-dynamic';
 import {MAT_FORM_FIELD_DEFAULT_OPTIONS} from '@angular/material/form-field';
 import { DialogComponent } from './payroll/dialog/dialog.component';
-
-
-
-
+import { ServicesInfoComponent } from './services-info/services-info.component';
+import { AboutUsComponent } from './about-us/about-us.component';
+import { CalenderAndAccessDateComponent } from './calender-and-access-date/calender-and-access-date.component';
 
 
 @NgModule({
@@ -99,9 +97,6 @@ import { DialogComponent } from './payroll/dialog/dialog.component';
     AppComponent,
     LogInComponent,
     SignUpComponent,
-    TemplatesComponent,
-    HeaderComponent,
-    FooterComponent,
     UsersComponent,
     ListComponent,
     AddComponent,
@@ -121,10 +116,12 @@ import { DialogComponent } from './payroll/dialog/dialog.component';
     AdminComponent,
     DoctorComponent,
     PacientComponent,
-    SidenavComponent,
     ChatfrontendComponent,
     VideoconferencefrontendComponent,
-    DialogComponent
+    DialogComponent,
+    ServicesInfoComponent,
+    AboutUsComponent,
+    CalenderAndAccessDateComponent
   ],
   imports: [
     BrowserModule,
@@ -179,7 +176,7 @@ import { DialogComponent } from './payroll/dialog/dialog.component';
     ReactiveFormsModule,
     MatNativeDateModule
   ],
-  providers: [ LogInService ],
+  providers: [ ServiceService, CookieService ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

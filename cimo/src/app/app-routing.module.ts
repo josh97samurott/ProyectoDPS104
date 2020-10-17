@@ -3,10 +3,7 @@ import { Routes, RouterModule } from '@angular/router';
 
 //Importaciones de componentes
 import { LogInComponent } from '../app/log-in/log-in.component';
-import { HeaderComponent } from '../app/templates/header/header.component';
-import { AdminComponent } from '../app/dashboard/admin/admin.component';
-import { DoctorComponent } from '../app/dashboard/doctor/doctor.component';
-import { PacientComponent } from '../app/dashboard/pacient/pacient.component';
+import { DashboardComponent } from '../app/dashboard/dashboard.component';
 import { PrincipalpageComponent } from './principalpage/principalpage.component';
 import { SitePoliciesComponent } from './site-policies/site-policies.component';
 import { ChatfrontendComponent } from './cimo/chatfrontend/chatfrontend.component';
@@ -14,20 +11,37 @@ import { VideoconferencefrontendComponent } from './cimo/videoconferencefrontend
 import { PaymentComponent } from './payment/payment.component';
 import { PayrollComponent } from './payroll/payroll.component';
 import { StatisticalComponent } from './statistical/statistical.component';
+import { SignUpComponent } from './sign-up/sign-up.component';
+import { ServicesInfoComponent } from './services-info/services-info.component';
+import { AboutUsComponent } from './about-us/about-us.component';
+import { UsersComponent } from './users/users.component';
+import { ChatComponent } from './management-cimo/chat/chat.component';
+import { VideoconferencesComponent } from './management-cimo/videoconferences/videoconferences.component';
+import { ErrorControlComponent } from './error-control/error-control.component';
+import { CalenderAndAccessDateComponent } from './calender-and-access-date/calender-and-access-date.component';
+
 
 const routes: Routes = [
-  { path: 'log-in', component: LogInComponent, pathMatch: 'full' }, //Los siguientes son de plantillas
-  { path: 'header', component: HeaderComponent },
-  { path: 'admindashboard', component: AdminComponent, pathMatch: 'full' },
-  { path: 'doctordashboard', component: DoctorComponent, pathMatch: 'full' },
-  { path: 'pacientdashboard', component: PacientComponent, pathMatch: 'full' },
-  { path: 'inicio', component: PrincipalpageComponent },
-  { path: 'politicas', component: SitePoliciesComponent },
+  { path: '', component: PrincipalpageComponent },
+  { path: 'principalpage', component: PrincipalpageComponent, pathMatch: 'full' },
+  { path: 'log-in', component: LogInComponent, pathMatch: 'full' },
+  { path: 'sign-up', component: SignUpComponent, pathMatch: 'full' },
+  { path: 'services-info', component: ServicesInfoComponent, pathMatch: 'full' },
+  { path: 'about-us', component: AboutUsComponent, pathMatch: 'full' },
+  { path: 'dashboard', component: DashboardComponent, pathMatch: 'full' },
+  { path: 'users', component: UsersComponent, pathMatch: 'full' },
+  { path: 'managment-chat', component: ChatComponent, pathMatch: 'full' },
+  { path: 'managment-videoconferences', component: VideoconferencesComponent, pathMatch: 'full' },
+  { path: 'payroll', component: PayrollComponent, pathMatch: 'full'},
+  { path: 'statistical', component: StatisticalComponent, pathMatch: 'full' },
+  { path: 'error-control', component: ErrorControlComponent, pathMatch: 'full' },
+  { path: 'calendar-and-access-date', component: CalenderAndAccessDateComponent, pathMatch: 'full' },
   { path: 'chat-frontend', component: ChatfrontendComponent },
   { path: 'videoconferences-frontend', component: VideoconferencefrontendComponent },
   { path: 'payment', component: PaymentComponent},
-  { path: 'payroll', component: PayrollComponent},
-  { path: 'statistical', component: StatisticalComponent }
+  
+  { path: 'inicio', component: PrincipalpageComponent },
+  { path: 'politicas', component: SitePoliciesComponent }
 ];
 
 @NgModule({
