@@ -7,6 +7,8 @@ import { Component, OnInit } from '@angular/core';
 })
 export class ChatfrontendComponent implements OnInit {
 
+  lista:string[]=["media hora","1 hora","2 horas", "3 horas"];
+
   constructor() { }
 
   ngOnInit(): void {

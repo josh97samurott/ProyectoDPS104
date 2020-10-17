@@ -1,46 +1,74 @@
-    <mat-card style="min-width: 650px; width: 60%; margin: 0 auto; margin-top: 2%; text-align: center;" class="color-white-blue">
+<h1 style="min-width: 650px; width: 60%; margin: 0 auto; margin-top: 4%; text-align: left;">Programar consulta para Videoconferencia</h1>
+<hr style="min-width: 650px; width: 60%; margin: 0 auto; margin-top: 1%; text-align: left; border: 1px solid;">
+   <mat-card style="min-width: 650px; width: 60%; margin: 0 auto; margin-top: 2%; text-align: center;">
       <br/>
-      <mat-card-title style="color: black;">
-          <h1>Programar videoconferencia</h1>
-      </mat-card-title>
+   <!--  <mat-card-title style="color: black;">
+          <h1>Programar consulta por videoconferencia</h1>
+      </mat-card-title> --> 
       <br/><br/>
       <mat-card-content>
+
           <form class="example-form" style="margin: 0 auto; font-size: 20px;">
-              <mat-form-field appearance="fill">
+
+              <mat-form-field appearance="fill" class="mb-4 example-full-width">
                   <mat-label>Elija fecha deseada</mat-label>
                   <input matInput [matDatepicker]="picker">
                   <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
                   <mat-datepicker #picker></mat-datepicker>
+                  <mat-hint align="start"><strong>Fecha de consulta</strong> </mat-hint>
               </mat-form-field>
               <br>
-              <mat-form-field>
-                  <input matInput type="text" placeholder="Hora inicio" required autofocus autocomplete="off">
+             
+              <mat-form-field class="example-full-width mb-5">
+                  <input matInput type="text" placeholder="Hora de inicio" required autofocus autocomplete="off">
+                  <mat-hint align="start"><strong>Hora de inicio de consulta</strong> </mat-hint>
               </mat-form-field>
               <br>
-              <h3>Escoja duración de videoconferencia</h3>
-                <mat-form-field appearance="fill">
-                  <mat-label>Desplegar horas</mat-label>
+              
+                <mat-form-field appearance="fill" class="example-full-width mb-5">
+                  <mat-label>Duranción de la consulta</mat-label>
                   <mat-select>
                     <mat-option *ngFor="let item of lista" [value]="item">
                       {{item}}
                     </mat-option>
                   </mat-select>
+                  <mat-hint align="start"><strong>Tiempo de duración de la consulta</strong> </mat-hint>
                 </mat-form-field>
                 <br>
+                <!--
               <mat-form-field class="example-full-width">
                   <mat-label >Ingrese link de conferencia</mat-label>
                   <input matInput type="text" placeholder="Ingrese link" required autofocus autocomplete="off">
-                </mat-form-field>
+                </mat-form-field>  -->
   
-                <h3>Elija el doctor con quién desea conversar</h3>
-                <mat-form-field appearance="fill">
-                  <mat-label>Doctores</mat-label>
+                
+               
+                <mat-form-field appearance="fill" class="example-full-width mb-5">
+                  <mat-label>Profesión</mat-label>
                   <mat-select>
                     <mat-option>
                       <!-- {{Cargar doctores aquí}} Usando ngFor-->
                     </mat-option>
                   </mat-select>
+                  <mat-hint align="start"><strong>Profesión del médico</strong> </mat-hint>
                 </mat-form-field>
+
+                <mat-form-field appearance="fill" class="example-full-width mb-4">
+                  <mat-label>Especialidad</mat-label>
+                  <mat-select>
+                    <mat-option>
+                      <!-- {{Cargar doctores aquí}} Usando ngFor-->
+                    </mat-option>
+                  </mat-select>
+                  <mat-hint align="start"><strong>Especialidad del profesional</strong> </mat-hint>
+                </mat-form-field>
+              
+                  <mat-form-field class="example-full-width mb-5">
+                    <mat-label>Comentario</mat-label>
+                    <textarea matInput placeholder=""></textarea>
+                    <mat-hint align="start"><strong>Coloque información sobre la consulta</strong> </mat-hint>
+                  </mat-form-field>
+                
               <br/><br/>
               <div class="example-button-row">
                   <button mat-raised-button color="primary" type="submit" style="width: 40%; margin-right: 10px;">Programar</button>
