@@ -4,49 +4,15 @@ header("Access-Control-Allow-Headers: Origin, X-Requested-With, Content-Type, Ac
 
 defined('BASEPATH') OR exit('No direct script access allowed');
 
-class Login extends CI_Controller {
+class Register_cimo_pacient extends CI_Controller {
 
 	public function __construct(){
 		parent::__construct();
-		$this->load->model("Login");
 	}
 
 	public function index()
 	{
 
-	}
-
-	public function log_in(){
-		$username = $this->input->get("username");
-		$password = $this->input->get("password");
-
-		if($this->Login->log_in($username, $password)){
-			$data = $this->Login->save_session($username);
-
-			//role = 0 (Administracion)
-			//role = 1 (Doctor)
-			//role = 2 (Paciente)
-			$user_data = array( 	
-				'id' => $data["id"],
-				'username' => $data["username"],
-				'name' => $data["name"],
-				'lastname' => $data["lastname"],
-				'email' => $data["email"],
-				'role' => $data["role"]
-			);
-				
-			$data["json"] = $user_data;
-			$data["json"]["access"] = "1"; 
-				
-			$this->load->view("backend/json_log_in.php", $data);
-		}
-		else{
-			$data["json"] = array(
-				"access" => "0"
-			);
-
-			$this->load->view("backend/json_log_in.php", $data);
-		}
 	}
 
 	public function register_videoconference(){
