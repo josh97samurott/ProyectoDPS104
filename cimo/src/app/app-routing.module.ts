@@ -19,6 +19,8 @@ import { ChatComponent } from './management-cimo/chat/chat.component';
 import { VideoconferencesComponent } from './management-cimo/videoconferences/videoconferences.component';
 import { ErrorControlComponent } from './error-control/error-control.component';
 import { CalenderAndAccessDateComponent } from './calender-and-access-date/calender-and-access-date.component';
+import { ChatDoctorComponent } from './cimo/chat-doctor/chat-doctor.component';
+import { VideoDoctorComponent } from './cimo/video-doctor/video-doctor.component';
 
 
 const routes: Routes = [
@@ -39,6 +41,8 @@ const routes: Routes = [
   { path: 'chat-frontend', component: ChatfrontendComponent },
   { path: 'videoconferences-frontend', component: VideoconferencefrontendComponent },
   { path: 'payment', component: PaymentComponent},
+  { path: 'chat-doctor', component: ChatDoctorComponent},
+  { path: 'video-doctor', component: VideoDoctorComponent},
   
   { path: 'inicio', component: PrincipalpageComponent },
   { path: 'politicas', component: SitePoliciesComponent }

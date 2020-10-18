@@ -90,6 +90,8 @@ import { DialogComponent } from './payroll/dialog/dialog.component';
 import { ServicesInfoComponent } from './services-info/services-info.component';
 import { AboutUsComponent } from './about-us/about-us.component';
 import { CalenderAndAccessDateComponent } from './calender-and-access-date/calender-and-access-date.component';
+import { ChatDoctorComponent } from './cimo/chat-doctor/chat-doctor.component';
+import { VideoDoctorComponent } from './cimo/video-doctor/video-doctor.component';
 
 
 @NgModule({
@@ -121,7 +123,9 @@ import { CalenderAndAccessDateComponent } from './calender-and-access-date/calen
     DialogComponent,
     ServicesInfoComponent,
     AboutUsComponent,
-    CalenderAndAccessDateComponent
+    CalenderAndAccessDateComponent,
+    ChatDoctorComponent,
+    VideoDoctorComponent
   ],
   imports: [
     BrowserModule,
