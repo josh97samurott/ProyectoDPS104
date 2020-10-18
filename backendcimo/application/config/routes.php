@@ -55,6 +55,6 @@ $route['translate_uri_dashes'] = FALSE;
 
 $route['log_in'] = "backend/log_in";
 $route['sign_up'] = "backend/sign_up";
-
+$route['register_videoconference'] = "backend/register_videoconference";
 
 
