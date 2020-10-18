@@ -53,8 +53,8 @@ $route['default_controller'] = 'welcome';
 $route['404_override'] = '';
 $route['translate_uri_dashes'] = FALSE;
 
-$route['log_in'] = "login/log_in";
-$route['sign_up'] = "signup/sign_up";
-$route['register_videoconference'] = "registervideoconferencepacient/register_videoconference";
+$route['log_in'] = "login_and_signup/log_in";
+$route['sign_up'] = "login_and_signup/sign_up";
+$route['register_videoconference'] = "Register_cimo_pacient/register_videoconference";
 
 
