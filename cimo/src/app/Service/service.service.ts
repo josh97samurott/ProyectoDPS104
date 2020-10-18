@@ -38,7 +38,7 @@ export class ServiceService {
   }
 
   register_videoconference(datos){
-    return this.http.post(`${this.url}register-videoconference`, JSON.stringify(datos));
+    return this.http.post(`${this.url}register_videoconference`, JSON.stringify(datos));
   }
 
 }
