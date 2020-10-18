@@ -1,0 +1,26 @@
+.main-content{
+    width: 100%;
+    background-color: white;
+    margin-bottom: 20px;   
+}
+
+.img {  
+    width: 14rem;
+    height: 14rem;
+    border: 0.5rem solid rgba(0, 0, 0, 0.1);
+    margin-top: 10px;
+}
+
+.card {
+    margin-top: 50px;
+}
+
+.card-profile{    
+    margin-bottom: 20px;   
+    margin-bottom: 10px; 
+}
+
+.card-avatar{
+    display: flex;
+    justify-content: center;
+}
