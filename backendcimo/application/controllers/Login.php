@@ -4,12 +4,11 @@ header("Access-Control-Allow-Headers: Origin, X-Requested-With, Content-Type, Ac
 
 defined('BASEPATH') OR exit('No direct script access allowed');
 
-class Backend extends CI_Controller {
+class Login extends CI_Controller {
 
 	public function __construct(){
 		parent::__construct();
 		$this->load->model("Login");
-		$this->load->model("Signup");
 	}
 
 	public function index()
@@ -48,71 +47,6 @@ class Backend extends CI_Controller {
 
 			$this->load->view("backend/json_log_in.php", $data);
 		}
-	}
-
-	public function sign_up(){
-		$JSONData = file_get_contents("php://input");
-		$dataObject = json_decode($JSONData);
-		/*$username = $this->input->post("username");
-		$password = $this->input->post("password");
-		$name = $this->input->post("name");
-		$lastname = $this->input->post("lastname");
-		$role = $this->input->post("role");
-		$email = $this->input->post("email");
-		$phone = $this->input->post("phone");
-		$nationality = $this->input->post("nationality");
-		$dui_or_passport = $this->input->post("dui_or_passport");*/
-		$username = $dataObject->username;
-		$password = $dataObject->password;
-		$name = $dataObject->name;
-		$lastname = $dataObject->lastname;
-		$role = $dataObject->role;
-		$email = $dataObject->email;
-		$phone = $dataObject->phone;
-		$nationality = $dataObject->nationality;
-		$dui_or_passport = $dataObject->dui_or_passport;
-		
-		if($role == 2){
-			if(isset($username)==true && isset($password)==true && isset($name)==true && isset($lastname)==true && isset($email)==true && isset($nationality)==true){
-				$data = array(
-					"username" => $username,
-					"password" => $password,
-					"name" => $name,
-					"lastname" => $lastname,
-					"role" => $role,
-					"email" => $email,
-					"phone" => $phone,
-					"nationality" => $nationality,
-					"dui_or_passport" => $dui_or_passport,
-					"creation_date" => date("d")."/".date("m")."/".date("Y"),
-					"confirm_email" => 0
-				);
-
-				if($this->Signup->sign_up($data)){
-					$data["json"] = array(
-						"access" => "1"
-					);
-				}
-				else{
-					$data["json"] = array(
-						"access" => "0"
-					);
-				}
-
-				$this->load->view("backend/json_sign_up.php", $data);
-			}
-			else{
-				$data["json"] = array(
-					"access" => "0"
-				);
-
-				$this->load->view("backend/json_sign_up.php", $data);
-			}
-		}
-		else if($role == 1){
-
-		}
-
 	}
 
 	public function register_videoconference(){
