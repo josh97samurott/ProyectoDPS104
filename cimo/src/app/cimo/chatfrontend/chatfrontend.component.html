@@ -9,11 +9,11 @@
     <br/><br/>
     <mat-card-content>
 
-        <form class="example-form" style="margin: 0 auto; font-size: 20px;">
+        <form class="example-form" #registerchatForm="ngForm" (ngSubmit)="registerChat(registerchatForm)" style="margin: 0 auto; font-size: 20px;">
 
             <mat-form-field appearance="fill" class="mb-4 example-full-width">
                 <mat-label>Elija fecha deseada</mat-label>
-                <input matInput [matDatepicker]="picker">
+                <input matInput [matDatepicker]="picker" name="_date" #_date="ngModel" [(ngModel)]="date">
                 <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
                 <mat-datepicker #picker></mat-datepicker>
                 <mat-hint align="start"><strong>Fecha de consulta</strong> </mat-hint>
@@ -21,16 +21,16 @@
             <br>
            
             <mat-form-field class="example-full-width mb-5">
-                <input matInput type="text" placeholder="Hora de inicio" required autofocus autocomplete="off">
+                <input matInput type="text" name="_start_session" #_start_session="ngModel" [(ngModel)]="start_session" placeholder="Hora de inicio" required autofocus autocomplete="off">
                 <mat-hint align="start"><strong>Hora de inicio de consulta</strong> </mat-hint>
             </mat-form-field>
             <br>
             
               <mat-form-field appearance="fill" class="example-full-width mb-5">
                 <mat-label>Duranción de la consulta</mat-label>
-                <mat-select>
-                  <mat-option *ngFor="let item of lista" [value]="item">
-                    {{item}}
+                <mat-select name="_duration" #_duration="ngModel" [(ngModel)]="duration" >
+                  <mat-option *ngFor="let item of lista" [value]="item.cantidad">
+                    {{item.duracion}}
                   </mat-option>
                 </mat-select>
                 <mat-hint align="start"><strong>Tiempo de duración de la consulta</strong> </mat-hint>
@@ -42,13 +42,17 @@
                 <input matInput type="text" placeholder="Ingrese link" required autofocus autocomplete="off">
               </mat-form-field>  -->
 
-              
+              <mat-form-field class="example-full-width mb-5">
+                <input matInput type="number" name="_age" #_age="ngModel" [(ngModel)]="age" placeholder="" required autofocus autocomplete="off">
+                <mat-hint align="start"><strong>Edad del paciente</strong> </mat-hint>
+            </mat-form-field>
+            <br>
              
               <mat-form-field appearance="fill" class="example-full-width mb-5">
                 <mat-label>Profesión</mat-label>
-                <mat-select>
-                  <mat-option>
-                    <!-- {{Cargar doctores aquí}} Usando ngFor-->
+                <mat-select name="_profession" #_profession="ngModel" [(ngModel)]="profession">
+                  <mat-option *ngFor="let item of profesiones" [value]="item">
+                    {{item}}
                   </mat-option>
                 </mat-select>
                 <mat-hint align="start"><strong>Profesión del médico</strong> </mat-hint>
@@ -56,9 +60,9 @@
 
               <mat-form-field appearance="fill" class="example-full-width mb-4">
                 <mat-label>Especialidad</mat-label>
-                <mat-select>
-                  <mat-option>
-                    <!-- {{Cargar doctores aquí}} Usando ngFor-->
+                <mat-select name="_specialization" #_specialization="ngModel" [(ngModel)]="specialization">
+                  <mat-option *ngFor="let item of especializaciones" [value]="item.id">
+                    {{item.tipo}}
                   </mat-option>
                 </mat-select>
                 <mat-hint align="start"><strong>Especialidad del profesional</strong> </mat-hint>
@@ -66,7 +70,7 @@
             
                 <mat-form-field class="example-full-width mb-5">
                   <mat-label>Comentario</mat-label>
-                  <textarea matInput placeholder=""></textarea>
+                  <textarea matInput placeholder="" name="_commentary" #_commentary="ngModel" [(ngModel)]="commentary"></textarea>
                   <mat-hint align="start"><strong>Coloque información sobre la consulta</strong> </mat-hint>
                 </mat-form-field>
               
