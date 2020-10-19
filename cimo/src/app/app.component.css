@@ -25,3 +25,11 @@ span{
 hr {
   border: #d2f5e3 1px solid;
 }
+
+.contenedor-footer{
+    padding-top: 30px;
+    margin: 0px auto;
+    width: 40%;
+    height: 100%;   
+}
+
