@@ -1,5 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-
+import { NgForm } from '@angular/forms';
+import { ServiceService } from '../../Service/service.service';
+import { HttpClient } from '@angular/common/http';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-chatfrontend',
@@ -8,11 +11,70 @@ import { Component, OnInit } from '@angular/core';
 })
 export class ChatfrontendComponent implements OnInit {
 
-  lista:string[]=["media hora","1 hora","2 horas", "3 horas"];
+  date:string;
+  start_session:string;
+  duration:number;
+  profession:string;
+  specialization:number;
+  commentary:string;
+  age:number;
 
-  constructor() { }
+
+  lista:any=[
+    {duracion:"30 minutos", cantidad:30},
+    {duracion: "1 hora", cantidad:60},
+    {duracion: "2 horas", cantidad:120}];
+
+  profesiones:any=["Medico"];
+
+  
+  especializaciones:any=[
+    {tipo:"Psicologo", id:1},
+    {tipo: "Nutricionista", id:2},
+    {tipo: "Pediatra", id:3},
+    {tipo: "Medico general", id:4}];
+
+  constructor(private service:ServiceService, private router:Router) { }
 
   ngOnInit(): void {
+  }
+
+  registerChat(registervideoForm: NgForm){
+    
+    var data={
+      id_pacient:2,
+      id_profession_specialization: this.specialization,
+      age: this.age,
+      date:this.date,
+      start_session:this.start_session,
+      duration:this.duration,
+      type_date:"chat en linea",
+      commentary:this.commentary
+      
+    }
+
+    this.service.register_chatconference(data).subscribe(result => {
+      if(result["res"] == "funciono"){
+        alert("Registro de cita por chat en linea exitoso.");
+        this.cleanForm();
+      }
+      else{
+        alert("Hubo un problema, por favor intentelo de nuevo.");
+      }
+    });
+   
+    console.log(data);
+  }
+
+  cleanForm(){
+    this.date=null;
+    this.duration=null;
+    this.profession=null;
+    this.specialization=null;
+    this.age=null;
+    this.start_session= null;
+    this.commentary=null;
+
   }
 
 }

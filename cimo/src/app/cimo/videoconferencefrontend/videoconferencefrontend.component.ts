@@ -63,13 +63,21 @@ export class VideoconferencefrontendComponent implements OnInit {
         alert("Hubo un problema, por favor intentelo de nuevo.");
       }
     });
-
+   
+    console.log(data);
   }
 
   cleanForm(){
+    this.date=null;
+    this.duration=null;
+    this.profession=null;
+    this.specialization=null;
+    this.age=null;
     this.start_session= null;
     this.commentary=null;
 
   }
-
+  
+  
+  
 }
