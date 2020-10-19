@@ -2,12 +2,26 @@ import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 
+import { CommonModule } from '@angular/common';
+import { NgbModalModule } from '@ng-bootstrap/ng-bootstrap';
+import { FlatpickrModule } from 'angularx-flatpickr';
+
+
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { LogInComponent } from './log-in/log-in.component';
 import { SignUpComponent } from './sign-up/sign-up.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+
+import { FullCalendarModule } from '@fullcalendar/angular'; // the main connector. must go first
+import dayGridPlugin from '@fullcalendar/daygrid'; // a plugin
+import interactionPlugin from '@fullcalendar/interaction'; // a plugin
+
+FullCalendarModule.registerPlugins([ // register FullCalendar plugins
+  dayGridPlugin,
+  interactionPlugin
+]);
 
 
 
@@ -92,6 +106,9 @@ import { AboutUsComponent } from './about-us/about-us.component';
 import { CalenderAndAccessDateComponent } from './calender-and-access-date/calender-and-access-date.component';
 import { ChatDoctorComponent } from './cimo/chat-doctor/chat-doctor.component';
 import { VideoDoctorComponent } from './cimo/video-doctor/video-doctor.component';
+import { CalendarModule, DateAdapter } from 'angular-calendar';
+import { adapterFactory } from 'angular-calendar/date-adapters/date-fns';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 
 
 @NgModule({
@@ -178,7 +195,14 @@ import { VideoDoctorComponent } from './cimo/video-doctor/video-doctor.component
     BrowserAnimationsModule,
     FormsModule,
     ReactiveFormsModule,
-    MatNativeDateModule
+    MatNativeDateModule,
+    FullCalendarModule,
+    CalendarModule.forRoot({ provide: DateAdapter, useFactory: adapterFactory }),
+    NgbModule, // register FullCalendar with you app
+    NgbModalModule,
+    FlatpickrModule.forRoot(),
+    
+
   ],
   providers: [ ServiceService, CookieService ],
   bootstrap: [AppComponent]

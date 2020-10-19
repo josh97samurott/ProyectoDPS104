@@ -1,0 +1,16 @@
+.contenedor-calendario{
+    width: 100%;
+    background-color: white;
+    margin-bottom: 20px;   
+}
+
+h3 {
+    margin: 10px;
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+
+  }
+  
+  pre {
+    background-color: #f5f5f5;
+    padding: 15px;
+  }
