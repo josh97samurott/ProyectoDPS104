@@ -45,4 +45,8 @@ export class ServiceService {
     return this.http.post(`${this.url}register_chatconference`, JSON.stringify(datos));
   }
 
+  payment(id){
+    return this.http.get(`${this.url}payment?id=${id}`);
+  }
+
 }

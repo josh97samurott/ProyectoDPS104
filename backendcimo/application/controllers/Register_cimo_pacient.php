@@ -32,6 +32,7 @@ class Register_cimo_pacient extends CI_Controller {
 
 		//comienzan datos para la tabla billing
 
+		$current_date=$dataObject->current_date;
 		$description=$dataObject->description;
 		$number_card=$dataObject->number_card;
 		$expiration_date_card=$dataObject->expiration_date_card;
@@ -41,7 +42,7 @@ class Register_cimo_pacient extends CI_Controller {
 		$state=$dataObject->state;
 
 		if(isset($id_pacient)==true && isset($id_profession_specialization)==true && isset($age)==true && isset($date)==true && isset($start_session)==true && isset($duration)==true && isset($type_date)==true && isset($commentary)==true
-		&& isset($description)==true && isset($number_card)==true && isset($expiration_date_card)==true && isset($to_name_card)==true && isset($security_code)==true && isset($total)==true && isset($state)==true){
+		&& isset($description)==true && isset($number_card)==true && isset($expiration_date_card)==true && isset($to_name_card)==true && isset($security_code)==true && isset($total)==true && isset($state)==true && isset($current_date)==true){
 			$data = array(
 				"id_pacient" => $id_pacient,
 				"id_profession_specialization" => $id_profession_specialization,
@@ -53,6 +54,7 @@ class Register_cimo_pacient extends CI_Controller {
 				"commentary" => $commentary,
 
 				//aqui van datos para tabla billing
+				"current_date" => $current_date,
 				"description" => $description,
 				"number_card" => $number_card,
 				"expiration_date_card" => $expiration_date_card,
@@ -93,6 +95,7 @@ class Register_cimo_pacient extends CI_Controller {
 
 		//comienzan datos para la tabla billing
 
+		$current_date=$dataObject->current_date;
 		$description=$dataObject->description;
 		$number_card=$dataObject->number_card;
 		$expiration_date_card=$dataObject->expiration_date_card;
@@ -102,7 +105,7 @@ class Register_cimo_pacient extends CI_Controller {
 		$state=$dataObject->state;
 
 		if(isset($id_pacient)==true && isset($id_profession_specialization)==true && isset($age)==true && isset($date)==true && isset($start_session)==true && isset($duration)==true && isset($type_date)==true && isset($commentary)==true
-		&& isset($description)==true && isset($number_card)==true && isset($expiration_date_card)==true && isset($to_name_card)==true && isset($security_code)==true && isset($total)==true && isset($state)==true){
+		&& isset($description)==true && isset($number_card)==true && isset($expiration_date_card)==true && isset($to_name_card)==true && isset($security_code)==true && isset($total)==true && isset($state)==true && isset($current_date)==true ){
 			$data = array(
 				"id_pacient" => $id_pacient,
 				"id_profession_specialization" => $id_profession_specialization,
@@ -114,6 +117,7 @@ class Register_cimo_pacient extends CI_Controller {
 				"commentary" => $commentary,
 
 				//aqui van datos para tabla billing
+				"current_date" => $current_date,
 				"description" => $description,
 				"number_card" => $number_card,
 				"expiration_date_card" => $expiration_date_card,

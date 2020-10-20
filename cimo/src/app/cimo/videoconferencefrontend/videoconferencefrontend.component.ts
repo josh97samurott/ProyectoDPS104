@@ -13,6 +13,8 @@ import { Router } from '@angular/router';
 })
 export class VideoconferencefrontendComponent implements OnInit {
 
+  current_date=new Date();
+
   date:string;
   start_session:string;
   duration:number;
@@ -74,7 +76,7 @@ export class VideoconferencefrontendComponent implements OnInit {
 
     
     var data={
-      id_pacient:2,
+      id_pacient:this.service.getToken('id'),
       id_profession_specialization: this.specialization,
       age: this.age,
       date:this.date,
@@ -82,7 +84,8 @@ export class VideoconferencefrontendComponent implements OnInit {
       duration:this.duration,
       type_date:"videoconferencia",
       commentary:this.commentary,
-      //aqui comienzan los datos para billing de pago y se les adjuntara date
+      //aqui comienzan los datos para billing de pago
+      current_date:this.current_date,
       description:"Compra de sesión de videoconferencia",
       number_card:this.number_card,
       expiration_date_card:this.expiration_date_card,

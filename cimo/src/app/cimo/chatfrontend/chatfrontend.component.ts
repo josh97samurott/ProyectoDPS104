@@ -11,6 +11,8 @@ import { Router } from '@angular/router';
 })
 export class ChatfrontendComponent implements OnInit {
 
+  current_date=new Date();
+
   date:string;
   start_session:string;
   duration:number;
@@ -66,7 +68,7 @@ export class ChatfrontendComponent implements OnInit {
       }
     
     var data={
-      id_pacient:2,
+      id_pacient:this.service.getToken('id'),
       id_profession_specialization: this.specialization,
       age: this.age,
       date:this.date,
@@ -74,7 +76,8 @@ export class ChatfrontendComponent implements OnInit {
       duration:this.duration,
       type_date:"chat en linea",
       commentary:this.commentary,
-      //aqui comienzan los datos para billing de pago y se les adjuntara date
+      //aqui comienzan los datos para billing de pago
+      current_date:this.current_date,
       description:"Compra de sesión de chat en linea",
       number_card:this.number_card,
       expiration_date_card:this.expiration_date_card,

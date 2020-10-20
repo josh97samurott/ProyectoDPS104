@@ -16,7 +16,7 @@ class Register_conference extends CI_Model {
             
             $db_id = $dbcimo->query("SELECT id FROM appoiment_request WHERE id_pacient = ".$dataregister["id_pacient"]." and date = '".$dataregister["date"]."' ");
             $row=$db_id->row_array();
-            $sql2 = "INSERT INTO billing VALUES(null, ".$row["id"].", '".$dataregister["date"]."', '".$dataregister["description"]."', ".$dataregister["number_card"].", '".$dataregister["expiration_date_card"]."', '".$dataregister["to_name_card"]."',  ".$dataregister["security_code"].", ".$dataregister["total"].", '".$dataregister["state"]."')";
+            $sql2 = "INSERT INTO billing VALUES(null, ".$row["id"].", '".$dataregister["current_date"]."', '".$dataregister["description"]."', ".$dataregister["number_card"].", '".$dataregister["expiration_date_card"]."', '".$dataregister["to_name_card"]."',  ".$dataregister["security_code"].", ".$dataregister["total"].", '".$dataregister["state"]."')";
 
             if($dbcimo->query($sql2)==TRUE){
                 $this->dbcimo = null;
@@ -42,7 +42,7 @@ class Register_conference extends CI_Model {
             
             $db_id = $dbcimo->query("SELECT id FROM appoiment_request WHERE id_pacient = ".$dataregister["id_pacient"]." and date = '".$dataregister["date"]."' ");
             $row=$db_id->row_array();
-            $sql2 = "INSERT INTO billing VALUES(null, ".$row["id"].", '".$dataregister["date"]."', '".$dataregister["description"]."', ".$dataregister["number_card"].", '".$dataregister["expiration_date_card"]."', '".$dataregister["to_name_card"]."',  ".$dataregister["security_code"].", ".$dataregister["total"].", '".$dataregister["state"]."')";
+            $sql2 = "INSERT INTO billing VALUES(null, ".$row["id"].", '".$dataregister["current_date"]."', '".$dataregister["description"]."', ".$dataregister["number_card"].", '".$dataregister["expiration_date_card"]."', '".$dataregister["to_name_card"]."',  ".$dataregister["security_code"].", ".$dataregister["total"].", '".$dataregister["state"]."')";
 
             if($dbcimo->query($sql2)==TRUE){
                 $this->dbcimo = null;

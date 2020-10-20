@@ -19,6 +19,14 @@
                 <mat-hint align="start"><strong>Fecha de consulta: MM/DD/AA</strong> </mat-hint>
             </mat-form-field>
             <br>
+
+            <!--ESTE CAMPO OCULTO ES PARA LA FECHA ACTUAL-->
+
+            <mat-form-field hidden appearance="fill" class="mb-5 example-full-width">
+              <input matInput [matDatepicker]="picker3" name="_actual" #_actual="ngModel" [(ngModel)]="current_date">
+              <mat-datepicker-toggle matSuffix [for]="picker3"></mat-datepicker-toggle>
+              <mat-datepicker #picker3></mat-datepicker>
+           </mat-form-field>
            
             <mat-form-field class="example-full-width mb-5">
                 <input matInput type="text" name="_start_session" #_start_session="ngModel" [(ngModel)]="start_session" placeholder="Hora de inicio" required autofocus autocomplete="off">
