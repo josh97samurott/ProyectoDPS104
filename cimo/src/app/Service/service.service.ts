@@ -49,4 +49,8 @@ export class ServiceService {
     return this.http.get(`${this.url}payment?id=${id}`);
   }
 
+  user_info(id){
+    return this.http.get(`${this.url}user_info?id=${id}`);
+  }
+
 }

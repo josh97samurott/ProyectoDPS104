@@ -58,5 +58,7 @@ $route['sign_up'] = "login_and_signup/sign_up";
 $route['register_videoconference'] = "Register_cimo_pacient/register_videoconference";
 $route['register_chatconference'] = "Register_cimo_pacient/register_chatconference";
 $route['payment'] = "Payment/payment";
+$route['user_info'] = "User_info/user_info";
+
 
 
