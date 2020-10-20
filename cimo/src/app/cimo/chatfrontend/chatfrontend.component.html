@@ -1,7 +1,7 @@
 <h1 style="min-width: 650px; width: 60%; margin: 0 auto; margin-top: 4%; text-align: left;">Programar consulta para Chat en linea</h1>
 <hr style="min-width: 650px; width: 60%; margin: 0 auto; margin-top: 1%; text-align: left; border: 1px solid;">
 
-<mat-card style="min-width: 650px; width: 60%; margin: 0 auto; margin-top: 2%; text-align: center;">
+<mat-card style="min-width: 650px; width: 60%; margin: 0 auto; margin-top: 2%; margin-bottom: 5%; text-align: center;">
     <br/>
  <!--  <mat-card-title style="color: black;">
         <h1>Programar consulta por chat en linea</h1>
@@ -11,22 +11,22 @@
 
         <form class="example-form" #registerchatForm="ngForm" (ngSubmit)="registerChat(registerchatForm)" style="margin: 0 auto; font-size: 20px;">
 
-            <mat-form-field appearance="fill" class="mb-4 example-full-width">
+            <mat-form-field appearance="fill" class="mb-5 example-full-width">
                 <mat-label>Elija fecha deseada</mat-label>
                 <input matInput [matDatepicker]="picker" name="_date" #_date="ngModel" [(ngModel)]="date">
                 <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
                 <mat-datepicker #picker></mat-datepicker>
-                <mat-hint align="start"><strong>Fecha de consulta</strong> </mat-hint>
+                <mat-hint align="start"><strong>Fecha de consulta: MM/DD/AA</strong> </mat-hint>
             </mat-form-field>
             <br>
            
             <mat-form-field class="example-full-width mb-5">
                 <input matInput type="text" name="_start_session" #_start_session="ngModel" [(ngModel)]="start_session" placeholder="Hora de inicio" required autofocus autocomplete="off">
-                <mat-hint align="start"><strong>Hora de inicio de consulta</strong> </mat-hint>
+                <mat-hint align="start"><strong>Hora de inicio de consulta (Por favor asignar 48 horas de antelación minimo)</strong> </mat-hint>
             </mat-form-field>
             <br>
             
-              <mat-form-field appearance="fill" class="example-full-width mb-5">
+              <mat-form-field appearance="fill" class="example-full-width mb-5 mt-2">
                 <mat-label>Duranción de la consulta</mat-label>
                 <mat-select name="_duration" #_duration="ngModel" [(ngModel)]="duration" >
                   <mat-option *ngFor="let item of lista" [value]="item.cantidad">
@@ -55,7 +55,7 @@
                     {{item}}
                   </mat-option>
                 </mat-select>
-                <mat-hint align="start"><strong>Profesión del médico</strong> </mat-hint>
+                <mat-hint align="start"><strong>Profesión del médico para la cita</strong> </mat-hint>
               </mat-form-field>
 
               <mat-form-field appearance="fill" class="example-full-width mb-4">
@@ -65,19 +65,59 @@
                     {{item.tipo}}
                   </mat-option>
                 </mat-select>
-                <mat-hint align="start"><strong>Especialidad del profesional</strong> </mat-hint>
+                <mat-hint align="start"><strong>Especialidad del profesional para la cita</strong> </mat-hint>
               </mat-form-field>
             
-                <mat-form-field class="example-full-width mb-5">
+                <mat-form-field class="example-full-width mb-5 mt-3">
                   <mat-label>Comentario</mat-label>
                   <textarea matInput placeholder="" name="_commentary" #_commentary="ngModel" [(ngModel)]="commentary"></textarea>
                   <mat-hint align="start"><strong>Coloque información sobre la consulta</strong> </mat-hint>
                 </mat-form-field>
               
             <br/><br/>
+
+
+            <hr style="border: 1px solid;" >
+            <h1>Datos de pago</h1>
+            <hr style="border: 1px solid;" class="mt-5">
+
+            <mat-form-field class="example-full-width mb-5 mt-5">
+              <input matInput type="text" name="_number_card" #_number_card="ngModel" [(ngModel)]="number_card" placeholder="" required autofocus autocomplete="off">
+              <mat-hint align="start"><strong>Ingrese el número de su targeta</strong> </mat-hint>
+          </mat-form-field>
+
+          <br>
+
+        <mat-form-field appearance="fill" class="mb-5 example-full-width">
+          <mat-label>Elija fecha deseada</mat-label>
+          <input matInput [matDatepicker]="picker2" name="_expiration_date_card" #_expiration_date_card="ngModel" [(ngModel)]="expiration_date_card">
+          <mat-datepicker-toggle matSuffix [for]="picker2"></mat-datepicker-toggle>
+          <mat-datepicker #picker2></mat-datepicker>
+          <mat-hint align="start"><strong>Fecha de expiración de la targeta</strong> </mat-hint>
+      </mat-form-field>
+        <br>
+
+        <mat-form-field class="example-full-width mb-5">
+          <input matInput type="text" name="_to_name_card" #_to_name_card="ngModel" [(ngModel)]="to_name_card" placeholder="Dueño de la targeta" required autofocus autocomplete="off">
+          <mat-hint align="start"><strong>Dueño de la targeta</strong> </mat-hint>
+        </mat-form-field>
+        <br>
+
+        <mat-form-field class="example-full-width mb-5">
+          <input matInput type="text" name="_security_code" #_security_code="ngModel" [(ngModel)]="security_code" placeholder="" required autofocus autocomplete="off">
+          <mat-hint align="start"><strong>Ingrese código de seguridad de su targeta</strong> </mat-hint>
+        </mat-form-field>
+        <br>
+
+        <mat-form-field class="example-full-width mb-5">
+          <input matInput type="text"  disabled="disabled" name="_total" #_total="ngModel" [(ngModel)]="total"   autofocus >
+          <mat-hint align="start"><strong>Total a pagar</strong> </mat-hint>
+        </mat-form-field>
+        <br>
+
+
             <div class="example-button-row">
                 <button mat-raised-button color="primary" type="submit" style="width: 40%; margin-right: 10px;">Programar</button>
-                <button mat-raised-button color="primary" type="submit" style="width: 40%;">Regresar</button>
               </div>
             
 
