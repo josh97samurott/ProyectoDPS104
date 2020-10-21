@@ -16,48 +16,57 @@
                                     
                                     <div class="col-md-3">
                                         <mat-form-field class="example-full-width">
-                                          <input type="text" matInput name="_username" #_username="ngModel" [(ngModel)]="username">
+                                          <mat-label>Usuario:</mat-label>
+                                          <input [disabled]="codigo == 0 ? true : null" type="text" matInput name="_username" #_username="ngModel" [(ngModel)]="username">
                                         </mat-form-field>
                                     </div>
 
                                     <div class="col-md-4">
                                         <mat-form-field class="example-full-width">
-                                          <input type="text" matInput name="_name" #_name="ngModel" [(ngModel)]="name" >
+                                          <mat-label>Nombre:</mat-label>
+                                          <input [disabled]="codigo == 0 ? true : null" type="text" matInput name="_name" #_name="ngModel" [(ngModel)]="name" >
                                         </mat-form-field>
                                     </div>
                                     <div class="col-md-5">
                                         <mat-form-field class="example-full-width">
-                                            <input type="text" matInput name="_lastname" #_lastname="ngModel" [(ngModel)]="lastname" >
+                                          <mat-label>Apellido:</mat-label>
+                                          <input [disabled]="codigo == 0 ? true : null" type="text" matInput name="_lastname" #_lastname="ngModel" [(ngModel)]="lastname" >
                                           </mat-form-field>
                                       </div>
                                 </div>
                                 <div class="row">
                                     <div class="col-md-6">
                                       <mat-form-field class="example-full-width">
-                                        <input matInput  type="text" name="_dui" #_dui="ngModel" [(ngModel)]="dui_or_passport">
+                                        <mat-label>DUI:</mat-label>
+                                        <input [disabled]="codigo == 0 ? true : null" matInput  type="text" name="_dui" #_dui="ngModel" [(ngModel)]="dui_or_passport">
                                       </mat-form-field>
                                     </div>
                                     <div class="col-md-6">
                                       <mat-form-field class="example-full-width">
-                                        <input matInput name="_email" #_email="ngModel" [(ngModel)]="email" type="email">
+                                        <mat-label>Telefono:</mat-label>
+                                        <input [disabled]="codigo == 0 ? true : null" matInput name="_phone" #_phone="ngModel" [(ngModel)]="phone" type="tel">                                        
                                       </mat-form-field>
                                     </div>
                                 </div>
                                 <div class="row">
                                     <div class="col-md-6">
                                       <mat-form-field class="example-full-width">
-                                        <input matInput name="_phone" #_phone="ngModel" [(ngModel)]="phone" type="tel">
+                                        <mat-label>Correo:</mat-label>
+                                        <input  [disabled]="codigo == 0 ? true : null" matInput name="_email" #_email="ngModel" [(ngModel)]="email" type="email">                                        
                                       </mat-form-field>
                                     </div>
                                     <div class="col-md-6">
                                       <mat-form-field class="example-full-width">
-                                        <input matInput name="_nationality" #_nationality="ngModel" [(ngModel)]="nationality" type="text">
+                                        <mat-label>Pais:</mat-label>
+                                        <input [disabled]="codigo == 0 ? true : null" matInput name="_nationality" #_nationality="ngModel" [(ngModel)]="nationality" type="text">
                                       </mat-form-field>
                                     </div>
                                     
                                 </div>
                                 
-                                <button color="accent" mat-raised-button type="submit" class="btn btn-danger pull-right">Edit Profile</button>
+                                <button (click)="seleccionar(id)" *ngIf="codigo == 0" color="accent" mat-raised-button type="submit" class="btn btn-danger pull-right">Editar</button>
+                                &nbsp;
+                                <button (click)="actualizar()" *ngIf="codigo !== 0"  color="primary" mat-raised-button type="submit" class="btn btn-danger pull-right">Actualizar</button>
                                 <div class="clearfix"></div>
                             </form>
                         </div>
@@ -67,16 +76,11 @@
                     <div class="card card-profile">
                         <div class="card-avatar">
                             <a href="javascript:void(0)">
-                                <img class="rounded-circle img" src="../../assets/drhouse.jpg" />
+                                <img class="rounded-circle img" src="../../assets/avatar.png" />
                             </a>
                         </div>
-                        <div class="card-body">
-                            <h6 class="card-category text-gray">CEO / Co-Founder</h6>
-                            <h4 class="card-title">Dr. House</h4>
-                            <p class="card-description">
-                                Gregory House es el personaje principal de la serie de televisión House M.D. Se trata de un médico brillante, famoso por resolver casos médicos que los demás consideran complicados y algunas veces descrito como cascarrabias, dado a su peculiar forma de relacionarse con los demás
-    
-                            </p>
+                        <div class="card-body">                            
+                            <h4 class="card-title">{{username}}</h4>                            
                         </div>
                     </div>
                 </div>

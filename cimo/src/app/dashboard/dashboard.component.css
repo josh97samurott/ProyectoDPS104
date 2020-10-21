@@ -18,9 +18,20 @@
 .card-profile{    
     margin-bottom: 20px;   
     margin-bottom: 10px; 
+    height: 80%;
 }
 
 .card-avatar{
     display: flex;
     justify-content: center;
 }
+.card-title{
+    text-align: center;
+    font-size: 20px;
+}
+
+input:disabled{
+    color: rgb(59, 59, 59);
+    font-size: 15px;
+}
+

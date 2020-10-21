@@ -53,4 +53,8 @@ export class ServiceService {
     return this.http.get(`${this.url}user_info?id=${id}`);
   }
 
+  user_update(data){
+    return this.http.post(`${this.url}user_update`, JSON.stringify(data));
+  }
+
 }
