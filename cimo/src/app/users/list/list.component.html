@@ -1,63 +1,470 @@
-<table mat-table [dataSource]="dataSource" matSort class="mat-elevation-z8">
+<mat-card>
+  <mat-card-content>
+      <mat-tab-group mat-stretch-tabs>
+          <mat-tab label="Pacientes"> 
+            <br/><br/>
+            <h2>Formulario de creación de usuarios</h2>
+            <form #pacientForm="ngForm" (ngSubmit)="actionFormDoctor(pacientForm)">
+              <mat-form-field class="example-full-width">
+                <mat-label >Id (Aplica solo para modificación de cuenta)</mat-label>
+                <input matInput name="_id" type="text" value="{{id}}" readonly>
+              </mat-form-field>
 
-    <!-- Position Column -->
-    <ng-container matColumnDef="position">
-      <th mat-header-cell *matHeaderCellDef mat-sort-header> No. </th>
-      <td mat-cell *matCellDef="let element"> {{element.position}} </td>
-    </ng-container>
-  
-    <!-- Name Column -->
-    <ng-container matColumnDef="name">
-      <th mat-header-cell *matHeaderCellDef mat-sort-header> Name </th>
-      <td mat-cell *matCellDef="let element"> {{element.name}} </td>
-    </ng-container>
-    <!-- Name Column -->
-    <ng-container matColumnDef="lastname">
-      <th mat-header-cell *matHeaderCellDef mat-sort-header> Apellido </th>
-      <td mat-cell *matCellDef="let element"> {{element.lastname}} </td>
-    </ng-container>
-    <!-- Name Column -->
-    <ng-container matColumnDef="dui">
-      <th mat-header-cell *matHeaderCellDef mat-sort-header> Dui </th>
-      <td mat-cell *matCellDef="let element"> {{element.dui}} </td>
-    </ng-container>
-    <ng-container matColumnDef="email">
-      <th mat-header-cell *matHeaderCellDef mat-sort-header> Correo </th>
-      <td mat-cell *matCellDef="let element"> {{element.email}} </td>
-    </ng-container>
-    <ng-container matColumnDef="role">
-      <th mat-header-cell *matHeaderCellDef mat-sort-header> Role </th>
-      <td mat-cell *matCellDef="let element"> {{element.role}} </td>
-    </ng-container>
-    <ng-container matColumnDef="phone">
-      <th mat-header-cell *matHeaderCellDef mat-sort-header> Tel. </th>
-      <td mat-cell *matCellDef="let element"> {{element.phone}} </td>
-    </ng-container>
-    <ng-container matColumnDef="nationality">
-      <th mat-header-cell *matHeaderCellDef mat-sort-header> Nacionalidad </th>
-      <td mat-cell *matCellDef="let element"> {{element.nationality}} </td>
-    </ng-container>
-    <ng-container matColumnDef="creation_date">
-      <th mat-header-cell *matHeaderCellDef mat-sort-header> Fecha de Creacion</th>
-      <td mat-cell *matCellDef="let element"> {{element.creation_date}} </td>
-    </ng-container>
+              <mat-form-field class="example-full-width">
+                <mat-label >Usuario</mat-label>
+                <input matInput name="_username" #_username="ngModel" [(ngModel)]="username" type="text" required autocomplete="off">
+              </mat-form-field>
+              <label style="color: red; text-decoration: underline;">{{message_user_repeated}}</label>
 
-    <ng-container matColumnDef="actions">
-      <th mat-header-cell *matHeaderCellDef>Actions</th>
-      <td mat-cell *matCellDef="let element">  
-        <button mat-flat-button color="accent">
-         <mat-icon>delete</mat-icon> 
-        </button>&nbsp;
-        <button mat-flat-button color="primary">
-        <mat-icon>edit</mat-icon>
-        </button>
-      </td>
-      
-    </ng-container>  
-  
-    
-  
-    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
-    <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
-</table>
+              <mat-form-field class="example-full-width">
+                  <mat-label>Contraseña (Debe de contener letras y números)</mat-label>
+                  <input matInput name="_password"  #_password="ngModel" [(ngModel)]="password" type="password" placeholder="Ingrese una contraseña" required autocomplete="off">
+              </mat-form-field>    
+
+              <mat-form-field class="example-full-width">
+                  <mat-label >Nombre</mat-label>
+                  <input matInput type="text" name="_name" #_name="ngModel" [(ngModel)]="name" placeholder="Ingrese su nombre" required autocomplete="off">
+              </mat-form-field>
+
+              <mat-form-field class="example-full-width">
+                  <mat-label >Apellido</mat-label>
+                  <input matInput type="text" name="_lastname" #_lastname="ngModel" [(ngModel)]="lastname" placeholder="Ingrese su apellido" required autocomplete="off">
+              </mat-form-field>
+
+              <mat-form-field class="example-full-width">
+                  <mat-label >Correo eléctronico</mat-label>
+                  <input matInput type="text" name="_email" #_email="ngModel" [(ngModel)]="email" placeholder="Ingrese su correo eléctronico" pattern="[^@\s]+@[^@\s]+\.[^@\s]+" required autocomplete="off">
+              </mat-form-field>
+              <label style="color: red; text-decoration: underline;">{{message_email_repeated}}</label>
+
+              <mat-form-field class="example-full-width">
+                <mat-label>Tipo de usuario</mat-label>
+                <mat-select name="_role" #_role="ngModel" [(ngModel)]="role"  required>
+                    <mat-option value="2">Paciente</mat-option>
+                </mat-select>
+              </mat-form-field>
+
+
+              <mat-form-field class="example-full-width">
+                  <mat-label >Número telefónico o celular</mat-label>
+                  <input matInput type="text" name="_phone" #_phone="ngModel" [(ngModel)]="phone" placeholder="Ingrese su número de contacto" autocomplete="off">
+              </mat-form-field>
+
+              <mat-form-field class="example-full-width">
+                  <mat-label>Nacionalidad</mat-label>
+                  <mat-select name="_nationality" #_nationality="ngModel" [(ngModel)]="nationality"  required>
+                      <input (keyup)="onKey($event.target.value)">
+                      <mat-option>Ingrese su país de origen</mat-option>
+                      <mat-option *ngFor="let state of selectedStates" [value]="state">{{state}}</mat-option>
+                  </mat-select>
+              </mat-form-field>
+
+              <br/>
+              <label style="color: green; text-decoration: underline; font-size: 18px;">{{message_ok}}</label>
+              <label style="color: red; text-decoration: underline; padding-bottom: 1%; font-size: 18px;" >{{message_failed}}</label>
+              <br/>
+              <button mat-raised-button color="primary" [hidden]="edit" type="submit">Crear cuenta de administrador</button>
+              &nbsp; 
+              <button mat-stroked-button color="primary" type="submit" [hidden]="!edit">Modificar cuenta de administrador</button>
+              &nbsp;
+              <button mat-raised-button color="warn" type="submit" (click)="changeButton()" [hidden]="!edit">Cambiar a creación de cuenta</button>
+              <br/><br/>
+            </form>
+
+            <h2>Registro de usuarios pacientes</h2>
+            <h3>Nota: Dar clic en un registro para expandir la información.</h3>
+            <label style="color: orange; text-decoration: underline;">{{message_delete}}</label>
+            <table mat-table
+                  [dataSource]="userspacients" multiTemplateDataRows
+                  class="mat-elevation-z8">
+              <ng-container matColumnDef="{{column}}" *ngFor="let column of displayedColumnsPacients">
+                <th mat-header-cell *matHeaderCellDef> {{column}} </th>
+                <td mat-cell *matCellDef="let userspacients"> {{userspacients[column]}} </td>
+              </ng-container>
+
+              <!-- Expanded Content Column - The detail row is made up of this one column that spans across all columns -->
+              <ng-container matColumnDef="expandedDetail">
+                <td mat-cell *matCellDef="let userspacients" [attr.colspan]="displayedColumnsPacients.length">
+                  <div class="example-element-detail"
+                      [@detailExpand]="userspacients == expandedElement ? 'expanded' : 'collapsed'">
+                    
+                    <div class="example-element-description">
+                      <p>Télefono celular: {{userspacients.phone}}
+                        <span [hidden]="userspacients.phone">No se ha registrado número de télefono</span>
+                      </p>
+                      
+                      <p>Nacionalidad: {{userspacients.nationality}}</p>
+                      
+                      <p>Dui o pasaporte: {{userspacients.dui_or_passport}}
+                        <span [hidden]="userspacients.phone">No se ha registrado un número de dui ni pasaporte</span>
+                      </p>
+                      
+                      <p>Fecha de creación del usuario: {{userspacients.creation_date}}</p>
+                      
+                      <p>Cuenta de correo eléctronico confirmada: 
+                        <span [hidden]="userspacients.confirm_email == 0">Si</span>
+                        <span [hidden]="userspacients.confirm_email == 1">No</span>
+                      </p>
+
+                      <button (click)="delete(userspacients.id)" mat-flat-button color="accent">
+                        <mat-icon>delete</mat-icon> Eliminar usuario
+                       </button>&nbsp;
+                       <button (click)="update(userspacients.id)" mat-flat-button color="primary">
+                       <mat-icon>edit</mat-icon> Editar usuario
+                       </button>
+                    </div>
+                  </div>
+                </td>
+              </ng-container>
+
+              <tr mat-header-row *matHeaderRowDef="displayedColumnsPacients"></tr>
+              <tr mat-row *matRowDef="let userspacients; columns: displayedColumnsPacients;"
+                  class="example-element-row"
+                  [class.example-expanded-row]="expandedElement === userspacients"
+                  (click)="expandedElement = expandedElement === userspacients ? null : userspacients">
+              </tr>
+              <tr mat-row *matRowDef="let row; columns: ['expandedDetail']" class="example-detail-row"></tr>
+            </table>
+          </mat-tab>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+          <mat-tab label="Doctores">
+            <br/><br/>
+            <h2>Formulario de creación de usuarios</h2>
+            <form #doctorForm="ngForm" (ngSubmit)="actionFormDoctor(doctorForm)">
+              <mat-form-field class="example-full-width">
+                <mat-label >Id (Aplica solo para modificación de cuenta)</mat-label>
+                <input matInput name="_id" type="text" value="{{id}}" readonly>
+              </mat-form-field>
+
+              <mat-form-field class="example-full-width">
+                <mat-label >Usuario</mat-label>
+                <input matInput name="_username" #_username="ngModel" [(ngModel)]="username" type="text" required autocomplete="off">
+              </mat-form-field>
+              <label style="color: red; text-decoration: underline;">{{message_user_repeated}}</label>
+
+              <mat-form-field class="example-full-width">
+                  <mat-label>Contraseña (Debe de contener letras y números)</mat-label>
+                  <input matInput name="_password"  #_password="ngModel" [(ngModel)]="password" type="password" placeholder="Ingrese una contraseña" required autocomplete="off">
+              </mat-form-field>    
+
+              <mat-form-field class="example-full-width">
+                  <mat-label >Nombre</mat-label>
+                  <input matInput type="text" name="_name" #_name="ngModel" [(ngModel)]="name" placeholder="Ingrese su nombre" required autocomplete="off">
+              </mat-form-field>
+
+              <mat-form-field class="example-full-width">
+                  <mat-label >Apellido</mat-label>
+                  <input matInput type="text" name="_lastname" #_lastname="ngModel" [(ngModel)]="lastname" placeholder="Ingrese su apellido" required autocomplete="off">
+              </mat-form-field>
+
+              <mat-form-field class="example-full-width">
+                  <mat-label >Correo eléctronico</mat-label>
+                  <input matInput type="text" name="_email" #_email="ngModel" [(ngModel)]="email" placeholder="Ingrese su correo eléctronico" pattern="[^@\s]+@[^@\s]+\.[^@\s]+" required autocomplete="off">
+              </mat-form-field>
+              <label style="color: red; text-decoration: underline;">{{message_email_repeated}}</label>
+
+              <mat-form-field class="example-full-width">
+                <mat-label>Tipo de usuario</mat-label>
+                <mat-select name="_role" #_role="ngModel" [(ngModel)]="role"  required>
+                    <mat-option value="1">Doctor</mat-option>
+                </mat-select>
+              </mat-form-field>
+
+
+              <mat-form-field class="example-full-width">
+                  <mat-label >Número telefónico o celular</mat-label>
+                  <input matInput type="text" name="_phone" #_phone="ngModel" [(ngModel)]="phone" placeholder="Ingrese su número de contacto" autocomplete="off">
+              </mat-form-field>
+
+              <mat-form-field class="example-full-width">
+                  <mat-label>Nacionalidad</mat-label>
+                  <mat-select name="_nationality" #_nationality="ngModel" [(ngModel)]="nationality"  required>
+                      <input (keyup)="onKey($event.target.value)">
+                      <mat-option>Ingrese su país de origen</mat-option>
+                      <mat-option *ngFor="let state of selectedStates" [value]="state">{{state}}</mat-option>
+                  </mat-select>
+              </mat-form-field>
+
+              <mat-form-field class="example-full-width">
+                <mat-label>Profesión</mat-label>
+                <mat-select name="_id_profession_specialization" #_id_profession_specialization="ngModel" [(ngModel)]="id_profession_specialization" required>
+                    <mat-option>Ingrese su profesión</mat-option>
+                    <mat-option *ngFor="let p of profession_specialization" [value]="p.id" >{{p.profession}} / {{p.specialization}}</mat-option>
+                </mat-select>
+              </mat-form-field>
+
+              <mat-form-field class="example-full-width">
+                <mat-label>Observación</mat-label>
+                <input matInput type="text" name="_observation" #_observation="ngModel" [(ngModel)]="observation" placeholder="Ingrese observación de la información" autocomplete="off">
+              </mat-form-field>
+
+              <mat-form-field class="example-full-width">
+                <mat-label>Información confirmada</mat-label>
+                <mat-select name="_confirm_info" #_confirm_info="ngModel" [(ngModel)]="confirm_info"  required>
+                    <mat-option value="0" selected>No</mat-option>
+                    <mat-option value="1" selected>Si</mat-option>
+                </mat-select>
+              </mat-form-field>
+
+
+              
+
+              <br/>
+              <label style="color: green; text-decoration: underline; font-size: 18px;">{{message_ok}}</label>
+              <label style="color: red; text-decoration: underline; padding-bottom: 1%; font-size: 18px;" >{{message_failed}}</label>
+              <br/>
+              <button mat-raised-button color="primary" [hidden]="edit" type="submit">Crear cuenta de administrador</button>
+              &nbsp; 
+              <button mat-stroked-button color="primary" type="submit" [hidden]="!edit">Modificar cuenta de administrador</button>
+              &nbsp;
+              <button mat-raised-button color="warn" type="submit" (click)="changeButtonD()" [hidden]="!edit">Cambiar a creación de cuenta</button>
+              <br/><br/>
+            </form>
+
+            <h2>Registro de usuarios doctores</h2>
+            <h3>Nota: Dar clic en un registro para expandir la información.</h3>
+            <label style="color: orange; text-decoration: underline;">{{message_delete}}</label>
+            <table mat-table
+                  [dataSource]="usersdoctors" multiTemplateDataRows
+                  class="mat-elevation-z8">
+              <ng-container matColumnDef="{{column}}" *ngFor="let column of displayedColumnsDoctors">
+                <th mat-header-cell *matHeaderCellDef> {{column}} </th>
+                <td mat-cell *matCellDef="let usersdoctors"> {{usersdoctors[column]}} </td>
+              </ng-container>
+
+              <!-- Expanded Content Column - The detail row is made up of this one column that spans across all columns -->
+              <ng-container matColumnDef="expandedDetail">
+                <td mat-cell *matCellDef="let usersdoctors" [attr.colspan]="displayedColumnsDoctors.length">
+                  <div class="example-element-detail"
+                      [@detailExpand]="usersdoctors == expandedElement ? 'expanded' : 'collapsed'">
+                    
+                    <div class="example-element-description">
+                      <p>Télefono celular: {{usersdoctors.phone}}
+                        <span [hidden]="usersdoctors.phone">No se ha registrado número de télefono</span>
+                      </p>
+                      
+                      <p>Nacionalidad: {{usersdoctors.nationality}}</p>
+                      
+                      <p>Dui o pasaporte: {{usersdoctors.dui_or_passport}}
+                        <span [hidden]="usersdoctors.phone">No se ha registrado un número de dui ni pasaporte</span>
+                      </p>
+                      
+                      <p>Fecha de creación del usuario: {{usersdoctors.creation_date}}</p>
+                      
+                      <p>Cuenta de correo eléctronico confirmada: 
+                        <span [hidden]="usersdoctors.confirm_email == 0">Si</span>
+                        <span [hidden]="usersdoctors.confirm_email == 1">No</span>
+                      </p>
+
+                      <p>Profesión: {{usersdoctors.profession}}</p>
+
+                      <p>Especialización: {{usersdoctors.specialization}}</p>
+
+                      <p>Información de doctor confirmada: 
+                        <span [hidden]="usersdoctors.confirm_info == 0">Si</span>
+                        <span [hidden]="usersdoctors.confirm_info == 1">No</span>
+                      </p>
+
+                      <p>Observaciones de confirmación de la información doctor: {{usersdoctors.observation}}
+                        <span [hidden]="usersdoctors.observation">No se ha registrado ninguna observación</span>
+                      </p>
+
+                      
+
+                      <button (click)="deleteDoctor(usersdoctors.id_user, usersdoctors.id_doctor_information, usersdoctors.id_profession_specialization)" mat-flat-button color="accent">
+                        <mat-icon>delete</mat-icon> Eliminar usuario
+                       </button>&nbsp;
+                       <button (click)="updateDoctor(usersdoctors.id_user)" mat-flat-button color="primary">
+                       <mat-icon>edit</mat-icon> Editar usuario
+                       </button>
+                    </div>
+                  </div>
+                </td>
+              </ng-container>
+
+              <tr mat-header-row *matHeaderRowDef="displayedColumnsDoctors"></tr>
+              <tr mat-row *matRowDef="let usersdoctors; columns: displayedColumnsDoctors;"
+                  class="example-element-row"
+                  [class.example-expanded-row]="expandedElement === usersdoctors"
+                  (click)="expandedElement = expandedElement === usersdoctors ? null : usersdoctors">
+              </tr>
+              <tr mat-row *matRowDef="let row; columns: ['expandedDetail']" class="example-detail-row"></tr>
+            </table>
+          </mat-tab>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+          <mat-tab label="Administradores">
+            <br/><br/>
+            <h2>Formulario de creación de usuarios</h2>
+            <form #administratorForm="ngForm" (ngSubmit)="actionForm(administratorForm)">
+              <mat-form-field class="example-full-width">
+                <mat-label >Id (Aplica solo para modificación de cuenta)</mat-label>
+                <input matInput name="_id" type="text" value="{{id}}" readonly>
+              </mat-form-field>
+
+              <mat-form-field class="example-full-width">
+                <mat-label >Usuario</mat-label>
+                <input matInput name="_username" #_username="ngModel" [(ngModel)]="username" type="text" required autocomplete="off">
+              </mat-form-field>
+              <label style="color: red; text-decoration: underline;">{{message_user_repeated}}</label>
+
+              <mat-form-field class="example-full-width">
+                  <mat-label>Contraseña (Debe de contener letras y números)</mat-label>
+                  <input matInput name="_password"  #_password="ngModel" [(ngModel)]="password" type="password" placeholder="Ingrese una contraseña" required autocomplete="off">
+              </mat-form-field>    
+
+              <mat-form-field class="example-full-width">
+                  <mat-label >Nombre</mat-label>
+                  <input matInput type="text" name="_name" #_name="ngModel" [(ngModel)]="name" placeholder="Ingrese su nombre" required autocomplete="off">
+              </mat-form-field>
+
+              <mat-form-field class="example-full-width">
+                  <mat-label >Apellido</mat-label>
+                  <input matInput type="text" name="_lastname" #_lastname="ngModel" [(ngModel)]="lastname" placeholder="Ingrese su apellido" required autocomplete="off">
+              </mat-form-field>
+
+              <mat-form-field class="example-full-width">
+                  <mat-label >Correo eléctronico</mat-label>
+                  <input matInput type="text" name="_email" #_email="ngModel" [(ngModel)]="email" placeholder="Ingrese su correo eléctronico" pattern="[^@\s]+@[^@\s]+\.[^@\s]+" required autocomplete="off">
+              </mat-form-field>
+              <label style="color: red; text-decoration: underline;">{{message_email_repeated}}</label>
+
+              <mat-form-field class="example-full-width">
+                <mat-label>Tipo de usuario</mat-label>
+                <mat-select name="_role" #_role="ngModel" [(ngModel)]="role"  required>
+                    <mat-option value="0" selected>Administrador</mat-option>
+                </mat-select>
+              </mat-form-field>
+
+
+              <mat-form-field class="example-full-width">
+                  <mat-label >Número telefónico o celular</mat-label>
+                  <input matInput type="text" name="_phone" #_phone="ngModel" [(ngModel)]="phone" placeholder="Ingrese su número de contacto" autocomplete="off">
+              </mat-form-field>
+
+              <mat-form-field class="example-full-width">
+                  <mat-label>Nacionalidad</mat-label>
+                  <mat-select name="_nationality" #_nationality="ngModel" [(ngModel)]="nationality"  required>
+                      <input (keyup)="onKey($event.target.value)">
+                      <mat-option>Ingrese su país de origen</mat-option>
+                      <mat-option *ngFor="let state of selectedStates" [value]="state">{{state}}</mat-option>
+                  </mat-select>
+              </mat-form-field>
+
+              <br/>
+              <label style="color: green; text-decoration: underline; font-size: 18px;">{{message_ok}}</label>
+              <label style="color: red; text-decoration: underline; padding-bottom: 1%; font-size: 18px;" >{{message_failed}}</label>
+              <br/>
+              <button mat-raised-button color="primary" [hidden]="edit" type="submit">Crear cuenta de administrador</button>
+              &nbsp; 
+              <button mat-stroked-button color="primary" type="submit" [hidden]="!edit">Modificar cuenta de administrador</button>
+              &nbsp;
+              <button mat-raised-button color="warn" type="submit" (click)="changeButton()" [hidden]="!edit">Cambiar a creación de cuenta</button>
+              <br/><br/>
+            </form>
+
+            <h2>Registro de usuarios administradores</h2>
+            <h3>Nota: Dar clic en un registro para expandir la información.</h3>
+            <label style="color: orange; text-decoration: underline;">{{message_delete}}</label>
+            <table mat-table
+                  [dataSource]="usersadministrators" multiTemplateDataRows
+                  class="mat-elevation-z8">
+              <ng-container matColumnDef="{{column}}" *ngFor="let column of displayedColumnsAdministrators">
+                <th mat-header-cell *matHeaderCellDef> {{column}} </th>
+                <td mat-cell *matCellDef="let usersadministrators"> {{usersadministrators[column]}} </td>
+              </ng-container>
+
+              <!-- Expanded Content Column - The detail row is made up of this one column that spans across all columns -->
+              <ng-container matColumnDef="expandedDetail">
+                <td mat-cell *matCellDef="let usersadministrators" [attr.colspan]="displayedColumnsAdministrators.length">
+                  <div class="example-element-detail"
+                      [@detailExpand]="usersadministrators == expandedElement ? 'expanded' : 'collapsed'">
+                    
+                    <div class="example-element-description">
+                      <p>Télefono celular: {{usersadministrators.phone}}
+                        <span [hidden]="usersadministrators.phone">No se ha registrado número de télefono</span>
+                      </p>
+                      
+                      <p>Nacionalidad: {{usersadministrators.nationality}}</p>
+                      
+                      <p>Dui o pasaporte: {{usersadministrators.dui_or_passport}}
+                        <span [hidden]="usersadministrators.phone">No se ha registrado un número de dui ni pasaporte</span>
+                      </p>
+                      
+                      <p>Fecha de creación del usuario: {{usersadministrators.creation_date}}</p>
+                      
+                      <p>Cuenta de correo eléctronico confirmada: 
+                        <span [hidden]="usersadministrators.confirm_email == 0">Si</span>
+                        <span [hidden]="usersadministrators.confirm_email == 1">No</span>
+                      </p>
+
+                      <button (click)="delete(usersadministrators.id)" mat-flat-button color="accent">
+                        <mat-icon>delete</mat-icon> Eliminar usuario
+                       </button>&nbsp;
+                       <button (click)="update(usersadministrators.id)" mat-flat-button color="primary">
+                       <mat-icon>edit</mat-icon> Editar usuario
+                       </button>
+                    </div>
+                  </div>
+                </td>
+              </ng-container>
+
+              <tr mat-header-row *matHeaderRowDef="displayedColumnsAdministrators"></tr>
+              <tr mat-row *matRowDef="let usersadministrators; columns: displayedColumnsAdministrators;"
+                  class="example-element-row"
+                  [class.example-expanded-row]="expandedElement === usersadministrators"
+                  (click)="expandedElement = expandedElement === usersadministrators ? null : usersadministrators">
+              </tr>
+              <tr mat-row *matRowDef="let row; columns: ['expandedDetail']" class="example-detail-row"></tr>
+            </table>
+          </mat-tab>
+      </mat-tab-group>
+  </mat-card-content>
+</mat-card>
+
+
 

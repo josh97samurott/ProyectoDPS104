@@ -53,15 +53,6 @@ class Login_and_signup extends CI_Controller {
 	public function sign_up(){
 		$JSONData = file_get_contents("php://input");
 		$dataObject = json_decode($JSONData);
-		/*$username = $this->input->post("username");
-		$password = $this->input->post("password");
-		$name = $this->input->post("name");
-		$lastname = $this->input->post("lastname");
-		$role = $this->input->post("role");
-		$email = $this->input->post("email");
-		$phone = $this->input->post("phone");
-		$nationality = $this->input->post("nationality");
-		$dui_or_passport = $this->input->post("dui_or_passport");*/
 		$username = $dataObject->username;
 		$password = $dataObject->password;
 		$name = $dataObject->name;
@@ -72,7 +63,7 @@ class Login_and_signup extends CI_Controller {
 		$nationality = $dataObject->nationality;
 		$dui_or_passport = $dataObject->dui_or_passport;
 		
-		if($role == 2){
+		if($role == 2 || $role == 0){
 			if(isset($username)==true && isset($password)==true && isset($name)==true && isset($lastname)==true && isset($email)==true && isset($nationality)==true){
 				$data = array(
 					"username" => $username,
@@ -88,14 +79,29 @@ class Login_and_signup extends CI_Controller {
 					"confirm_email" => 0
 				);
 
-				if($this->Signup->sign_up($data)){
-					$data["json"] = array(
-						"access" => "1"
-					);
+				if($this->Signup->check_user($data["username"])){
+
+					if($this->Signup->check_email($data["email"])){
+						if($this->Signup->sign_up($data)){
+							$data["json"] = array(
+								"res" => "1"
+							);
+						}
+						else{
+							$data["json"] = array(
+								"res" => "0"
+							);
+						}
+					}
+					else{
+						$data["json"] = array(
+							"res" => "-2"
+						);
+					}	
 				}
 				else{
 					$data["json"] = array(
-						"access" => "0"
+						"res" => "-1"
 					);
 				}
 
@@ -103,16 +109,75 @@ class Login_and_signup extends CI_Controller {
 			}
 			else{
 				$data["json"] = array(
-					"access" => "0"
+					"res" => "0"
 				);
 
 				$this->load->view("backend/json_sign_up.php", $data);
 			}
 		}
 		else if($role == 1){
+			$profession_specialization_select = $dataObject->profession_specialization_select;
+			$confirm_info = $dataObject->confirm_info;
+
+			if(isset($username)==true && isset($password)==true && isset($name)==true && isset($lastname)==true && isset($email)==true && isset($nationality)==true){
+				$data = array(
+					"username" => $username,
+					"password" => $password,
+					"name" => $name,
+					"lastname" => $lastname,
+					"role" => $role,
+					"email" => $email,
+					"phone" => $phone,
+					"nationality" => $nationality,
+					"dui_or_passport" => $dui_or_passport,
+					"creation_date" => date("d")."/".date("m")."/".date("Y"),
+					"confirm_email" => 0,
+					"id_profession_specialization" => $profession_specialization_select,
+					"confirm_info" => $confirm_info
+				);
+
+				if($this->Signup->check_user($data["username"])){
+
+					if($this->Signup->check_email($data["email"])){
+						
+						if($this->Signup->sign_up_doctor($data)){
+							$data["json"] = array(
+								"res" => "1"
+							);
+						}
+						else{
+							$data["json"] = array(
+								"res" => "0"
+							);
+						}
+					}
+					else{
+						$data["json"] = array(
+							"res" => "-2"
+						);
+					}
+				}
+				else{
+					$data["json"] = array(
+						"res" => "-1"
+					);
+				}
+				
+
+				$this->load->view("backend/json_sign_up.php", $data);
+
+			}
+			else{
+				$data["json"] = array(
+					"res" => "0"
+				);
+
+				$this->load->view("backend/json_sign_up.php", $data);
+			}
 
 		}
 
 	}
+
 
 }

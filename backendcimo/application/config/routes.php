@@ -67,5 +67,14 @@ $route['accept_chatconference'] = "Manage_appoiment/accept_chat";
 
 //user_update
 
+$route['get_profession'] = "Profession_and_specialization/get_profession";
+$route['get_users_pacients'] = "Users_controller/pacients";
+$route['get_users_doctors'] = "Users_controller/doctors";
+$route['get_users_administrators'] = "Users_controller/administrators";
+$route['get_user_information'] = "Users_controller/get_user_information";
+$route['get_doctor_information'] = "Users_controller/get_doctor_information";
+$route['update_user'] = "Users_controller/update_user";
+$route['delete_user'] = "Users_controller/delete_user";
+$route['delete_doctor'] = "Users_controller/delete_doctor";
 
 

@@ -18,11 +18,13 @@ export class LogInComponent implements OnInit {
   constructor(private service:ServiceService, private router:Router) { }
 
   ngOnInit(){
+    this.message = "";
   }
 
   logIn(loginForm: NgForm){
     this.service.login(this.username, this.password).subscribe(result => {
       if(result['access'] == 1){
+        this.message = "";
         this.service.setTokenLogin(result["id"],result["username"], result["name"], result["lastname"], result["email"], result["role"], result["access"]);
         if(result["role"] == 0){
           window.location.href = "/principalpage";

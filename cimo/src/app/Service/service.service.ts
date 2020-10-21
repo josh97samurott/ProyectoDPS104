@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { CookieService } from 'ngx-cookie-service';
+import { Observable } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -37,6 +38,14 @@ export class ServiceService {
     return this.http.post(`${this.url}sign_up`, JSON.stringify(datos));
   }
 
+  /*upload_cv_doctor(File): Observable<any>{
+    return this.http.post(`${this.url}sign_up_upload`, JSON.stringify(File));
+  }*/
+
+  get_profession(){
+    return this.http.get(`${this.url}get_profession`);
+  }
+
   register_videoconference(datos){
     return this.http.post(`${this.url}register_videoconference`, JSON.stringify(datos));
   }
@@ -71,6 +80,38 @@ export class ServiceService {
 
   accept_chatconference(data){
     return this.http.post(`${this.url}accept_chatconference`, JSON.stringify(data));
+  }
+  
+  get_users_pacients(){
+    return this.http.get(`${this.url}get_users_pacients`);
+  }
+
+  get_users_doctors(){
+    return this.http.get(`${this.url}get_users_doctors`);
+  }
+
+  get_users_administrators(){
+    return this.http.get(`${this.url}get_users_administrators`);
+  }
+
+  get_user_information(id_user){
+    return this.http.get(`${this.url}get_user_information?id=${id_user}`);
+  }
+
+  get_doctor_information(id_user){
+    return this.http.get(`${this.url}get_doctor_information?id_user=${id_user}`);
+  }
+
+  update_user(datos){
+    return this.http.post(`${this.url}update_user`, JSON.stringify(datos));
+  }
+
+  delete_user(id_user){
+    return this.http.get(`${this.url}delete_user?id=${id_user}`);
+  }
+
+  delete_doctor(id_user, id_info, id_p){
+    return this.http.get(`${this.url}delete_doctor?id_user=${id_user}&id_info=${id_info}&aid_p=${id_p}`);
   }
 
 }

@@ -3,6 +3,7 @@ import { NgForm } from '@angular/forms';
 import { ServiceService } from '../Service/service.service';
 import { HttpClient } from '@angular/common/http';
 import { Router } from '@angular/router';
+import { Archive } from '../Model/archive';
 
 @Component({
   selector: 'app-sign-up',
@@ -10,7 +11,13 @@ import { Router } from '@angular/router';
   styleUrls: ['./sign-up.component.css']
 })
 export class SignUpComponent implements OnInit {
+  message:string;
+  message2:string;
+  message3:string;
+  message4:string;
+  message5:string;
 
+  //Tabla de user
   username:string;
   password:string;
   confirmpassword:string;
@@ -19,35 +26,139 @@ export class SignUpComponent implements OnInit {
   email:string;
   phone:string;
   nationality:string;
+  dui_or_passport:string;
+
+  //Tabla de doctor_information (CV)
+  public archive: Archive;
+  public lastPK:number
+
+  //Profesiones    
+  profession_specialization;
+  profession_specialization_select;
 
   constructor(private service:ServiceService, private router:Router) { }
 
-  ngOnInit(): void {
+  ngOnInit(): void {  
+    this.message = "";
+    this.message2 = "";
+    this.message3 = "";
+    this.message4 = "";
+    this.message5 = "";
+    this.service.get_profession().subscribe(result => { this.profession_specialization = result });
   }
 
   registerPacient(registerpacientForm: NgForm){
-    var data = {
-      username: this.username,
-      password: this.password,
-      name: this.name,
-      lastname: this.lastname,
-      role: 2,
-      email: this.email,
-      phone: this.phone,
-      nationality: this.nationality,
-      dui_or_passport: null,
+    if(this.password == this.confirmpassword){
+      this.message = "";
+      var data = {
+        username: this.username,
+        password: this.password,
+        name: this.name,
+        lastname: this.lastname,
+        role: 2,
+        email: this.email,
+        phone: this.phone,
+        nationality: this.nationality,
+        dui_or_passport: null
+      }
+  
+      this.service.signup(data).subscribe(result => {
+        if(result["res"] == 1){
+          this.message = "";
+          this.message3 = "";
+          this.message4 = "";
+          this.message5 = "";
+          this.message2 = "Registro exitoso, por favor iniciar sesión con sus nuevas credenciales.";
+          this.cleanForm();
+        }
+        else if(result["res"] == 0){
+          this.message = "";
+          this.message2 = "";
+          this.message4 = "";
+          this.message5 = "";
+          this.message3 = "Hubo un problema al crear la cuenta, por favor intentelo de nuevo.";
+        }
+        else if(result["res"] == -1){
+          this.message = "";
+          this.message3 = "";
+          this.message2 = "";
+          this.message5 = "";
+          this.message4 = "Ya existe una cuenta con el usuario ingresado, por favor intente con otro nombre de usuario.";
+        }
+        else if(result["res"] == -2){
+          this.message = "";
+          this.message3 = "";
+          this.message2 = "";
+          this.message4 = "";
+          this.message5 = "Ya existe una cuenta con el correo eléctronico ingresado, por favor intente con otra cuenta de correo.";
+        }
+      });
     }
+    else{
+      this.message = "Las contraseñas no coinciden, por favor comprobar";
+    }
+  }
 
-    this.service.signup(data).subscribe(result => {
-      if(result["access"] == 1){
-        alert("Registro exitoso, por favor iniciar sesión con sus nuevas credenciales.");
-        this.cleanForm();
-      }
-      else{
-        alert("Hubo un problema al crear la cuenta, por favor intentelo de nuevo.");
-      }
-    });
+  fileEvent(fileInput: Event){
+    let file = (<HTMLInputElement>fileInput.target).files[0];
 
+    if(file.type == 'application/pdf'){
+      this.archive = new Archive(this.lastPK + 1, file.name, file.type);
+    }
+  }
+
+  registerDoctor(registerDoctor: NgForm){
+    if(this.password == this.confirmpassword){
+      var data = {
+        username: this.username,
+        password: this.password,
+        name: this.name,
+        lastname: this.lastname,
+        role: 1,
+        email: this.email,
+        phone: this.phone,
+        nationality: this.nationality,
+        dui_or_passport: this.dui_or_passport,
+        profession_specialization_select: this.profession_specialization_select,
+        confirm_info: 0
+      }
+
+      
+      this.service.signup(data).subscribe(result => {
+          if(result["res"] == 1){
+            this.message = "";
+            this.message3 = "";
+            this.message4 = "";
+            this.message5 = "";
+            this.message2 = "Registro exitoso, antes de poder iniciar sesión sus datos y credibilidad médica deben ser comprobados por lo que recibirá un correo eléctronico informandole sobre el estado de su cuenta en las proximas semanas.";
+            this.cleanForm();
+          }
+          else if(result["res"] == 0){
+            this.message = "";
+            this.message2 = "";
+            this.message4 = "";
+            this.message5 = "";
+            this.message3 = "Hubo un problema al crear la cuenta, por favor intentelo de nuevo.";
+          }
+          else if(result["res"] == -1){
+            this.message = "";
+            this.message3 = "";
+            this.message2 = "";
+            this.message5 = "";
+            this.message4 = "Ya existe una cuenta con el usuario ingresado, por favor intente con otro nombre de usuario.";
+          }
+          else if(result["res"] == -2){
+            this.message = "";
+            this.message3 = "";
+            this.message2 = "";
+            this.message4 = "";
+            this.message5 = "Ya existe una cuenta con el correo eléctronico ingresado, por favor intente con otra cuenta de correo.";
+          }
+      });
+    }
+    else{
+      this.message = "Las contraseñas no coinciden, por favor comprobar";
+    }
   }
 
   cleanForm(){
