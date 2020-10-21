@@ -60,6 +60,10 @@ $route['register_chatconference'] = "Register_cimo_pacient/register_chatconferen
 $route['payment'] = "Payment/payment";
 $route['user_info'] = "User_info/user_info";
 $route['user_update'] = "User_info/user_update";
+$route['manage_video'] = "Manage_appoiment/get_video_appoiment";
+$route['accept_videoconference'] = "Manage_appoiment/accept_video";
+$route['manage_chat'] = "Manage_appoiment/get_chat_appoiment";
+$route['accept_chatconference'] = "Manage_appoiment/accept_chat";
 
 //user_update
 

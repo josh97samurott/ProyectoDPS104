@@ -57,4 +57,20 @@ export class ServiceService {
     return this.http.post(`${this.url}user_update`, JSON.stringify(data));
   }
 
+  video_doctor(){
+    return this.http.get(`${this.url}manage_video`);
+  }
+
+  accept_videoconference(data){
+    return this.http.post(`${this.url}accept_videoconference`, JSON.stringify(data));
+  }
+
+  chat_doctor(){
+    return this.http.get(`${this.url}manage_chat`);
+  }
+
+  accept_chatconference(data){
+    return this.http.post(`${this.url}accept_chatconference`, JSON.stringify(data));
+  }
+
 }

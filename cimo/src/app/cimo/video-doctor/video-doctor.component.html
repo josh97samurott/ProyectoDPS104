@@ -1,60 +1,124 @@
 <h1 style="min-width: 650px; width: 80%; margin: 0 auto; margin-top: 4%; text-align: left;">Gestionar citas por videoconferencia</h1>
 <hr style="min-width: 650px; width: 80%; margin: 0 auto; margin-top: 1%; text-align: left; border: 1px solid;">
-<div class="mat-elevation-z8" style="min-width: 650px; width: 80%; margin: 0 auto; margin-top: 2%; text-align: left;">
-  <table mat-table [dataSource]="dataSource">
+<div class="mat-elevation-z8" style="min-width: 650px; width: 80%; margin: 0 auto; margin-top: 2%; margin-bottom: 5%; text-align: left;">
+
+  <table mat-table [dataSource]="datos" class="mat-elevation-z8" multiTemplateDataRows>
 
     
-    <ng-container matColumnDef="position">
-      <th mat-header-cell *matHeaderCellDef> No. </th>
-      <td mat-cell *matCellDef="let element"> {{element.position}} </td>
-    </ng-container>
-
-
     <ng-container matColumnDef="name">
-      <th mat-header-cell *matHeaderCellDef> Nombres </th>
+      <th class="h" mat-header-cell *matHeaderCellDef> Nombres </th>
       <td mat-cell *matCellDef="let element"> {{element.name}} </td>
     </ng-container>
 
     <ng-container matColumnDef="lastname">
-        <th mat-header-cell *matHeaderCellDef> Apellidos </th>
-        <td mat-cell *matCellDef="let element"> {{element.name}} </td>
+        <th class="h" mat-header-cell *matHeaderCellDef> Apellidos </th>
+        <td mat-cell *matCellDef="let element"> {{element.lastname}} </td>
+      </ng-container>
+
+      <ng-container matColumnDef="specialization">
+        <th class="h" mat-header-cell *matHeaderCellDef> Especialidad </th>
+        <td mat-cell *matCellDef="let element"> {{element.id_profession_specialization}} </td>
       </ng-container>
 
    
     <ng-container matColumnDef="date">
-      <th mat-header-cell *matHeaderCellDef> Fecha de cita </th>
-      <td mat-cell *matCellDef="let element"> {{element.weight}} </td>
+      <th class="h" mat-header-cell *matHeaderCellDef> Fecha de cita </th>
+      <td mat-cell *matCellDef="let element"> {{element.date}} </td>
     </ng-container>
 
     
     <ng-container matColumnDef="start_session">
-      <th mat-header-cell *matHeaderCellDef> Inicio de cita </th>
-      <td mat-cell *matCellDef="let element"> {{element.symbol}} </td>
+      <th class="h" mat-header-cell *matHeaderCellDef> Inicio de cita </th>
+      <td mat-cell *matCellDef="let element"> {{element.start_session}} </td>
     </ng-container>
 
     <ng-container matColumnDef="duration">
-      <th mat-header-cell *matHeaderCellDef> Duración </th>
-      <td mat-cell *matCellDef="let element"> {{element.symbol}} </td>
+      <th class="h" mat-header-cell *matHeaderCellDef> Duración </th>
+      <td mat-cell *matCellDef="let element"> {{element.duration}} Min </td>
     </ng-container>
 
     <ng-container matColumnDef="commentary">
-      <th mat-header-cell *matHeaderCellDef> Comentario </th>
-      <td mat-cell *matCellDef="let element"> {{element.symbol}} </td>
+      <th class="h" mat-header-cell *matHeaderCellDef> Comentario </th>
+      <td mat-cell *matCellDef="let element"> {{element.commentary}} </td>
+    </ng-container>
+
+    <ng-container matColumnDef="state">
+      <th class="h" mat-header-cell *matHeaderCellDef > Estado </th>
+      <td mat-cell *matCellDef="let element" style="color: red;"> {{element.state}} </td>
+    </ng-container>
+
+    <ng-container matColumnDef="total">
+      <th class="h" mat-header-cell *matHeaderCellDef> Total </th>
+      <td mat-cell *matCellDef="let element"> {{element.total}} <strong>$</strong>  </td>
+    </ng-container>
+
+<!--
+    <ng-container matColumnDef="actions">
+        <th class="h" mat-header-cell *matHeaderCellDef>Acciones</th>
+        <td mat-cell *matCellDef="let element">  
+          <button mat-raised-button color="primary">Ver</button>&nbsp;
+        </td>  
+    </ng-container>  -->
+
+    <ng-container matColumnDef="expandedDetail">
+      <td mat-cell *matCellDef="let datos" [attr.colspan]="displayedColumns.length">
+        <div class="example-element-detail" [@detailExpand]="datos == expandedElement ? 'expanded' : 'collapsed'">
+          
+          <div class="example-element-description">
+            <hr style="border: 1px solid;">
+            <p><strong>Id de cita:</strong>   {{datos.id_ap}}</p>
+            <p><strong>Nombres:</strong>   {{datos.name}}</p>
+            <p><strong>Apellidos:</strong>   {{datos.lastname}}</p>
+            <p><strong>Edad:</strong>   {{datos.age}}</p>
+            <p><strong>Correo:</strong>   {{datos.email}}</p>
+            <p><strong>Telefono:</strong>   {{datos.phone}}</p>
+            <p><strong>Nacionalidad:</strong>   {{datos.nationality}}</p>
+            <p><strong>Dui o pasaporte:</strong>   {{datos.dui_or_passport}}</p>
+
+            <form class="example-form">
+
+              <mat-form-field class="example-full-width">
+                <input matInput type="text" name="_link_meeting"  #_link_meeting="ngModel" [(ngModel)]="link_meeting" placeholder="Link de consulta" required autofocus autocomplete="off">
+                <mat-hint align="start"><strong>Ingrese el link donde se efectuara la consulta</strong> </mat-hint>
+              </mat-form-field>
+
+              <mat-form-field class="example-full-width mb-5 mt-3">
+                <mat-label>Comentario</mat-label>
+                <textarea matInput placeholder="" name="_commentary_accept" #_commentary_accept="ngModel" [(ngModel)]="commentary_accept"></textarea>
+                <mat-hint align="start"><strong>Coloque un comentario sobre la cita</strong> </mat-hint>
+              </mat-form-field>
+<!--
+              <mat-form-field  class="example-full-width">
+                <input matInput type="text" name="_id_billing" #_id_billing="ngModel" [(ngModel)]="datos.id_billing" value="{{id_billing}}" required autofocus autocomplete="off">
+                <mat-hint align="start"><strong>Ingrese el link donde se efectuara la consulta</strong> </mat-hint>
+              </mat-form-field>
+-->
+             
+
+              <button mat-flat-button color="primary" (click)="aceptarCita(datos.id_billing)" type="submit">
+                <mat-icon>bookmark</mat-icon> Aceptar cita
+               </button>&nbsp;
+
+            </form>
+
+            
+          </div>
+        </div>
+      </td>
     </ng-container>
 
 
-    <ng-container matColumnDef="actions">
-        <th mat-header-cell *matHeaderCellDef>Acciones</th>
-        <td mat-cell *matCellDef="let element">  
-          <button mat-raised-button color="primary">Aceptar</button>&nbsp;
-          <button mat-raised-button color="warn">Rechazar</button>
-        </td>  
-    </ng-container>  
-
-
     <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
-    <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
-  </table>
+  <!--  <tr mat-row *matRowDef="let datos; columns: displayedColumns;"></tr>-->
+  <tr mat-row *matRowDef="let datos; columns: displayedColumns;"
+                  class="example-element-row"
+                  [class.example-expanded-row]="expandedElement === datos"
+                  (click)="expandedElement = expandedElement === datos ? null : datos">
+              </tr>
+              <tr mat-row *matRowDef="let row; columns: ['expandedDetail']" class="example-detail-row"></tr>
+  </table>  
+
+
 
   <mat-paginator [pageSizeOptions]="[5, 10, 20]" showFirstLastButtons></mat-paginator>
 </div>
