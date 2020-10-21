@@ -1,0 +1,6 @@
+npm i
+ng add @angular/material
+npm install ngx-cookie-service
+ng add angular-calendar
+ng add @ng-bootstrap/ng-bootstrap
+npm install --save flatpickr angularx-flatpickr
