@@ -4,3 +4,6 @@ npm install ngx-cookie-service
 ng add angular-calendar
 ng add @ng-bootstrap/ng-bootstrap
 npm install --save flatpickr angularx-flatpickr
+npm install firebase @angular/fire --save
+npm install --save @types/gapi.auth2
+npm install firebase-tools

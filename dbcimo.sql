@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1:3306
--- Tiempo de generación: 21-10-2020 a las 21:35:22
+-- Tiempo de generación: 22-10-2020 a las 02:59:55
 -- Versión del servidor: 5.7.24
 -- Versión de PHP: 7.2.14
 
@@ -277,18 +277,20 @@ CREATE TABLE IF NOT EXISTS `user` (
   `creation_date` text NOT NULL,
   `confirm_email` int(11) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=MyISAM AUTO_INCREMENT=33 DEFAULT CHARSET=utf8mb4;
+) ENGINE=MyISAM AUTO_INCREMENT=36 DEFAULT CHARSET=utf8mb4;
 
 --
 -- Volcado de datos para la tabla `user`
 --
 
 INSERT INTO `user` (`id`, `username`, `password`, `name`, `lastname`, `role`, `email`, `phone`, `nationality`, `dui_or_passport`, `creation_date`, `confirm_email`) VALUES
+(34, 'joshua.reyes@udb.edu.sv', 'b6229fa18d243803cf5de23ca416565a', 'Joshua Caleb Reyes Rosa', 'Joshua Caleb Reyes Rosa', 2, 'joshua.reyes@udb.edu.sv', 0, 'Desconocida', '', '22/10/2020', 0),
 (29, 'samuel.tobias', 'e10adc3949ba59abbe56e057f20f883e', 'Samuel', 'Tobias', 2, 'samuel.tobias@gmail.com', 123, 'El Salvador', '', '21/10/2020', 0),
 (30, 'kevin.pleitez', 'e10adc3949ba59abbe56e057f20f883e', 'Kevin', 'Pleitez', 1, 'kevin.pleitez@gmail.com', 123456, 'El Salvador', '', '21/10/2020', 0),
 (31, 'flor.mejia', 'e10adc3949ba59abbe56e057f20f883e', 'Flor', 'Mejía', 2, 'flor.mejia@gmail.com', 77274499, 'El Salvador', '', '21/10/2020', 0),
 (32, 'wilmer.flores', 'e10adc3949ba59abbe56e057f20f883e', 'Willmer', 'Flores', 1, 'wilmer.flores@gmail.com', 77274499, 'El Salvador', '123457', '21/10/2020', 0),
-(27, 'joshua.reyes', 'e10adc3949ba59abbe56e057f20f883e', 'Joshua Caleb', 'Reyes Rosa', 0, 'joshuacalebreyes77@gmail.com', 77274499, 'El Salvador', '', '21/10/2020', 0);
+(27, 'joshua.reyes', 'e10adc3949ba59abbe56e057f20f883e', 'Joshua Caleb', 'Reyes Rosa', 0, 'joshuacalebreyes77@gmail.com', 77274499, 'El Salvador', '', '21/10/2020', 0),
+(35, 'vidarybiper@gmail.com', 'dd663b207c303b352d10b70bcd2bef43', 'Samuel Tobías', 'Samuel Tobías', 2, 'vidarybiper@gmail.com', 0, 'Desconocida', '', '22/10/2020', 0);
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
