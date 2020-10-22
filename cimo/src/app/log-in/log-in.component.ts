@@ -15,7 +15,7 @@ export class LogInComponent implements OnInit {
   public password:string;
   public message:string;
 
-  constructor(private service:ServiceService, private router:Router) { }
+  constructor(public service:ServiceService, private router:Router) { }
 
   ngOnInit(){
     this.message = "";
@@ -39,4 +39,6 @@ export class LogInComponent implements OnInit {
       }
     });
   }
+
+
 }

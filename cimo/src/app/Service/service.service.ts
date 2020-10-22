@@ -1,16 +1,26 @@
-import { Injectable } from '@angular/core';
+import { Injectable, NgZone } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { CookieService } from 'ngx-cookie-service';
 import { Observable } from 'rxjs';
+import { auth } from 'firebase/app';
+import { AngularFireAuth } from "@angular/fire/auth";
+import { AngularFirestore, AngularFirestoreDocument } from '@angular/fire/firestore';
+import { Router } from "@angular/router";
 
 @Injectable({
   providedIn: 'root'
 })
 export class ServiceService {
-
+  userexist = true;
   url='http://localhost/ProyectoDPS104/backendcimo/';
 
-  constructor(private http:HttpClient, private cookies:CookieService) { }
+  constructor(
+    public http:HttpClient, 
+    public cookies:CookieService,
+    public afs: AngularFirestore,
+    public afAuth: AngularFireAuth,
+    public ngZone: NgZone,
+    public router: Router) { }
 
   login(username?:string, password?:string){
     return this.http.get(`${this.url}log_in?username=${username}&password=${password}`);
@@ -114,4 +124,60 @@ export class ServiceService {
     return this.http.get(`${this.url}delete_doctor?id_user=${id_user}&id_info=${id_info}&aid_p=${id_p}`);
   }
 
+
+
+  //Logueo con google
+  GoogleAuth() {
+    return this.AuthLogin(new auth.GoogleAuthProvider());
+  }
+
+  AuthLogin(provider) {
+    return this.afAuth.signInWithPopup(provider)
+    .then((result) => {
+       this.ngZone.run(() => {
+          
+        })
+      this.SetUserData(result.user);
+    }).catch((error) => {
+      window.alert(error)
+    })
+  }
+
+  SetUserData(user) {
+    var userData = {
+      username: user.email,
+      password: user.uid,
+      name: user.displayName,
+      lastname: user.displayName,
+      role: 2,
+      email: user.email,
+      phone: null,
+      nationality: "Desconocida",
+      dui_or_passport: null
+    }
+
+    this.signup(userData).subscribe();
+  
+    this.login(user.email, user.uid).subscribe(result => {
+      if(result["access"] == 1){
+        this.setTokenLogin(result["id"],result["username"], result["name"], result["lastname"], result["email"], result["role"], result["access"]);
+        window.location.href = "/dashboard";
+      }
+      else{
+        alert("El inicio de sesión a través de google fallo, por favor intentelo de nuevo");
+      }
+    });
+
+    /*const userRef: AngularFirestoreDocument<any> = this.afs.doc(`users/${user.uid}`);
+    const userData: User = {
+      uid: user.uid,
+      email: user.email,
+      displayName: user.displayName,
+      photoURL: user.photoURL,
+      emailVerified: user.emailVerified
+    }
+    return userRef.set(userData, {
+      merge: true
+    })*/
+  }
 }

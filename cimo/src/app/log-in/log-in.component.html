@@ -17,10 +17,10 @@
               <input matInput name="_password" #_password="ngModel" [(ngModel)]="password" type="password" placeholder="Ingrese su contraseña"  required>
             </mat-form-field>
 
-            <!--button mat-button style="background-color: white; width: 90%;">
+            <button mat-button style="background-color: #DFDFDF; width: 90%;" (click)="service.GoogleAuth()">
                 <img width="20px" style="margin-bottom:3px; margin-right:5px" alt="Google sign-in" src="https://upload.wikimedia.org/wikipedia/commons/thumb/5/53/Google_%22G%22_Logo.svg/512px-Google_%22G%22_Logo.svg.png" />
                 Ingresa con Google
-            </button-->
+            </button>
             <br/><br/>
             <button mat-raised-button color="primary" type="submit" style="width: 90%;">Iniciar sesión</button>
             <br/><br/>

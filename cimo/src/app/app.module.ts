@@ -23,6 +23,11 @@ FullCalendarModule.registerPlugins([ // register FullCalendar plugins
   interactionPlugin
 ]);
 
+//Firebase
+import { AngularFireModule } from "@angular/fire";
+import { AngularFireAuthModule } from "@angular/fire/auth";
+import { AngularFirestoreModule } from '@angular/fire/firestore';
+import { environment } from '../environments/environment';
 
 
 //Material and CDK
@@ -201,8 +206,9 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
     NgbModule, // register FullCalendar with you app
     NgbModalModule,
     FlatpickrModule.forRoot(),
-    
-
+    AngularFireModule.initializeApp(environment.firebase),
+    AngularFireAuthModule,
+    AngularFirestoreModule
   ],
   providers: [ ServiceService, CookieService ],
   bootstrap: [AppComponent]
