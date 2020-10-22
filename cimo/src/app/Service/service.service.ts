@@ -12,8 +12,8 @@ import { Router } from "@angular/router";
 })
 export class ServiceService {
   userexist = true;
-  //url='http://localhost/ProyectoDPS104/backendcimo/';
-  url = 'https://citasmedicasonline.000webhostapp.com/backendcimo/';
+  url='http://localhost/ProyectoDPS104/backendcimo/';
+  //url = 'https://citasmedicasonline.000webhostapp.com/backendcimo/';
 
   constructor(
     public http:HttpClient, 
