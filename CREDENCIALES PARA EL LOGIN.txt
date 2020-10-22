@@ -1,7 +1,7 @@
 Usuario administrador:  joshua.reyes
 Contraseña: 123456
 
-Usuario paciente:   wilmer.flores
+Usuario paciente:   samuel.tobias
 Contraseña: 123456
 
 Usuario Doctor: kevin.pleitez
