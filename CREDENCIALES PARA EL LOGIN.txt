@@ -1,0 +1,9 @@
+Usuario administrador:  joshua.reyes
+Contraseña: 123456
+
+Usuario paciente:   wilmer.flores
+Contraseña: 123456
+
+Usuario Doctor: kevin.pleitez
+Contraseña: 123456
+
