@@ -125,6 +125,10 @@ export class ServiceService {
     return this.http.get(`${this.url}delete_doctor?id_user=${id_user}&id_info=${id_info}&aid_p=${id_p}`);
   }
 
+  calender(data){
+    return this.http.post(`${this.url}calender_and_access_date`, JSON.stringify(data));
+  }
+
 
 
   //Logueo con google

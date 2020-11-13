@@ -64,6 +64,7 @@ $route['manage_video'] = "Manage_appoiment/get_video_appoiment";
 $route['accept_videoconference'] = "Manage_appoiment/accept_video";
 $route['manage_chat'] = "Manage_appoiment/get_chat_appoiment";
 $route['accept_chatconference'] = "Manage_appoiment/accept_chat";
+$route['calender_and_access_date'] = "Calender/get_calender";
 
 //user_update
 

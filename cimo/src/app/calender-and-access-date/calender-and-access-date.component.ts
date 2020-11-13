@@ -1,4 +1,9 @@
-import {
+import { Component, OnInit, AfterViewInit, ViewChild } from '@angular/core';
+import {MatPaginator} from '@angular/material/paginator';
+import {MatTableDataSource} from '@angular/material/table';
+import { ServiceService } from '../Service/service.service';
+import {animate, state, style, transition, trigger} from '@angular/animations';
+/*import {
   Component,
   ChangeDetectionStrategy,
   ViewChild,
@@ -37,15 +42,61 @@ const colors: any = {
     secondary: '#FDF1BA',
   },
 };
-
+*/
 
 @Component({
   selector: 'app-calender-and-access-date',
   templateUrl: './calender-and-access-date.component.html',
-  styleUrls: ['./calender-and-access-date.component.css']
+  styleUrls: ['./calender-and-access-date.component.css'],
+  animations: [
+    trigger('detailExpand', [
+      state('collapsed', style({height: '0px', minHeight: '0'})),
+      state('expanded', style({height: '*'})),
+      transition('expanded <=> collapsed', animate('225ms cubic-bezier(0.4, 0.0, 0.2, 1)')),
+    ]),
+  ],
 })
-export class CalenderAndAccessDateComponent  {
+export class CalenderAndAccessDateComponent implements AfterViewInit{
 
+
+  datos=null;
+
+
+  displayedColumns: string[] = ['id', 'specialization', 'date', 'start_session', 'duration', 'type','commentary'];
+  //dataSource = new MatTableDataSource<PeriodicElement>(ELEMENT_DATA);
+  expandedElement: any | null;
+
+  @ViewChild(MatPaginator) paginator: MatPaginator;
+
+  constructor(private service:ServiceService) { }
+
+  ngAfterViewInit() {
+    //this.dataSource.paginator = this.paginator;
+  }
+
+  ngOnInit(): void {
+    this.recovery_data();
+    
+  }
+
+  recovery_data(){
+
+    var datos={
+      id_user:this.service.getToken('id'),
+    }
+
+    this.service.calender(datos).subscribe(result =>{
+          this.datos=result;   
+    });
+    //dataSource = this.datos;
+    
+  }
+
+
+
+
+
+  /*
   @ViewChild('modalContent', { static: true }) modalContent: TemplateRef<any>;
 
   view: CalendarView = CalendarView.Month;
@@ -188,7 +239,7 @@ export class CalenderAndAccessDateComponent  {
 
   closeOpenMonthViewDay() {
     this.activeDayIsOpen = false;
-  }
+  }*/
 
   
 
