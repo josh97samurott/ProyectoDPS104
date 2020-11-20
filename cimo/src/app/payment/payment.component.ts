@@ -2,6 +2,7 @@ import {AfterViewInit, Component, ViewChild, OnInit} from '@angular/core';
 import {MatPaginator} from '@angular/material/paginator';
 import {MatTableDataSource} from '@angular/material/table';
 import { ServiceService } from '../Service/service.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-payment',
@@ -9,7 +10,11 @@ import { ServiceService } from '../Service/service.service';
   styleUrls: ['./payment.component.css']
 })
 export class PaymentComponent implements OnInit {
-  
+  title = 'cimo';
+  access:string;
+  role:string;
+
+
   datos=null;
 
 
@@ -18,7 +23,7 @@ export class PaymentComponent implements OnInit {
 
   
 
-  constructor(private service:ServiceService) { 
+  constructor(private service:ServiceService,  private router:Router) { 
     this.recovery_billing();
     
 
@@ -28,6 +33,13 @@ export class PaymentComponent implements OnInit {
 
   ngOnInit(): void {
     this.recovery_billing();
+    this.access = this.service.getToken("access");
+    this.role = this.service.getToken("role");
+  }
+
+  closeSession(){
+    this.service.logOut();
+    this.router.navigate(["log-in"]);
   }
 
   recovery_billing(){

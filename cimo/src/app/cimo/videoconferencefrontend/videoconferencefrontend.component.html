@@ -1,134 +1,310 @@
-<h1 style="min-width: 650px; width: 60%; margin: 0 auto; margin-top: 4%; text-align: left;">Programar consulta para Videoconferencia</h1>
-<hr style="min-width: 650px; width: 60%; margin: 0 auto; margin-top: 1%; text-align: left; border: 1px solid;">
-   <mat-card style="min-width: 650px; width: 60%; margin: 0 auto; margin-top: 2%; margin-bottom: 5%; text-align: center;">
-      <br/>
-   <!--  <mat-card-title style="color: black;">
-          <h1>Programar consulta por videoconferencia</h1>
-      </mat-card-title> --> 
-      <br/><br/>
-      <mat-card-content>
+<mat-toolbar class="color-purple" style="height: 100px; color: white;">
+  <button [hidden]="access!='1'" mat-icon-button class="example-icon" (click)="sidenav.toggle()" aria-label="Example icon-button with menu icon">
+      <mat-icon>menu</mat-icon>
+  </button>
 
-          <form class="example-form" #registervideoForm="ngForm" (ngSubmit)="registerVideo(registervideoForm)" style="margin: 0 auto; font-size: 20px;">
+  <span style="margin-top: 0.5%;"><img src="../../../assets/logo.png" height="90px"></span>
+  <span class="example-spacer"></span>
+  <button mat-button class="example-icon" routerLink="/principalpage" aria-label="Example icon-button with heart icon">
+      <span>Inicio</span>
+  </button>
+  <button [hidden]="access == '1'" mat-button class="example-icon" routerLink="/log-in" aria-label="Example icon-button with heart icon">
+      <span>Iniciar sesión</span>
+  </button>
+  <button [hidden]="access == '1'" mat-button routerLink="/sign-up"  class="example-icon" aria-label="Example icon-button with share icon">
+      <span>Registrarse</span>
+  </button>
+  <button mat-button class="example-icon" routerLink="/services-info" aria-label="Example icon-button with share icon">
+      <span>Servicios</span>
+  </button>
+  <button mat-button class="example-icon" routerLink="/about-us" aria-label="Example icon-button with share icon">
+      <span>Acerca de nosotros</span>
+  </button>
+</mat-toolbar>
 
-              <mat-form-field appearance="fill" class="mb-5 example-full-width">
-                  <mat-label>Elija fecha deseada</mat-label>
-                  <input matInput [matDatepicker]="picker" name="_date" #_date="ngModel" [(ngModel)]="date">
-                  <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
-                  <mat-datepicker #picker></mat-datepicker>
-                  <mat-hint align="start"><strong>Fecha de consulta: MM/DD/AA</strong> </mat-hint>
-              </mat-form-field>
-              <br>
 
-              <!--ESTE CAMPO OCULTO ES PARA LA FECHA ACTUAL-->
+<mat-sidenav-container style="height: 89.7%; background-color: #D6E8EE;">
+  <mat-sidenav #sidenav mode="side" style="background-color: #00416d;" > 
+      <mat-list role="list">
+          <h2 style="text-align: center; padding-top: 20px;">Menú de navegación</h2>
+          <hr>
+          <mat-list-item role="listitem">
+            <button mat-button class="example-icon" routerLink="/dashboard" aria-label="Example icon-button with heart icon">
+              <span>Mi información de usuario</span>
+            </button>
+          </mat-list-item>
+          
+          <mat-list-item [hidden]="role != '0'" role="listitem">
+              <button mat-button class="example-icon" routerLink="/users" aria-label="Example icon-button with heart icon">
+                  <span>Usuarios del sistema</span>
+              </button>
+          </mat-list-item>
 
-              <mat-form-field hidden appearance="fill" class="mb-5 example-full-width">
-                <input matInput [matDatepicker]="picker3" name="_actual" #_actual="ngModel" [(ngModel)]="current_date">
-                <mat-datepicker-toggle matSuffix [for]="picker3"></mat-datepicker-toggle>
-                <mat-datepicker #picker3></mat-datepicker>
-            </mat-form-field>
-             
-              <mat-form-field  class="example-full-width mb-5">
-                  <input matInput type="text" name="_start_session" #_start_session="ngModel" [(ngModel)]="start_session" placeholder="Hora de inicio" required autofocus autocomplete="off">
-                  <mat-hint align="start"><strong>Hora de inicio de consulta (Por favor asignar 48 horas de antelación minimo)</strong> </mat-hint>
-              </mat-form-field>
-              <br>
-              
-                <mat-form-field appearance="fill" class="example-full-width mb-5 mt-2">
-                  <mat-label>Duranción de la consulta</mat-label>
-                  <mat-select name="_duration" #_duration="ngModel" [(ngModel)]="duration" (change)="pago()">
-                    <mat-option *ngFor="let item of lista" [value]="item.cantidad">
-                      {{item.duracion}}
-                    </mat-option>
-                  </mat-select>
-                  <mat-hint align="start"><strong>Tiempo de duración de la consulta</strong> </mat-hint>
-                </mat-form-field>
-                <br>
-                <!--
-              <mat-form-field class="example-full-width">
-                  <mat-label >Ingrese link de conferencia</mat-label>
-                  <input matInput type="text" placeholder="Ingrese link" required autofocus autocomplete="off">
-                </mat-form-field>  -->
+          <mat-list-item [hidden]="role != '0'" role="listitem">
+              <button mat-button class="example-icon" routerLink="/managment-videoconferences" aria-label="Example icon-button with heart icon">
+                  <span>Gestión de citas médicas por videoconferencia</span>
+              </button>
+          </mat-list-item>
+
+          <mat-list-item [hidden]="role != '0'" role="listitem">
+              <button mat-button class="example-icon" routerLink="/managment-chat" aria-label="Example icon-button with heart icon">
+                  <span>Gestión de citas médicas por chat en línea</span>
+              </button>
+          </mat-list-item>
+
+          <mat-list-item [hidden]="role != '0'" role="listitem">
+              <button mat-button class="example-icon" routerLink="/payroll" aria-label="Example icon-button with heart icon">
+                  <span>Planilla de pagos</span>
+              </button>
+          </mat-list-item>
+          
+          <mat-list-item [hidden]="role != '0'" role="listitem">
+              <button mat-button class="example-icon" routerLink="/statistical" aria-label="Example icon-button with heart icon">
+                  <span>Módulo estadístico</span>
+              </button>
+          </mat-list-item>
+
+          <mat-list-item [hidden]="role != '0'" role="listitem">
+              <button mat-button class="example-icon" routerLink="/error-control" aria-label="Example icon-button with heart icon">
+                  <span>Control de errores del sistema</span>
+              </button>
+          </mat-list-item>
+
+          <mat-list-item [hidden]="role != '2'" role="listitem">
+              <button mat-button class="example-icon" routerLink="/calendar-and-access-date" aria-label="Example icon-button with heart icon">
+                  <span>Calendario y acceso a citas</span>
+              </button>
+          </mat-list-item>
+          <mat-list-item [hidden]="role != '2'" role="listitem">
+              <button mat-button class="example-icon" routerLink="/videoconferences-frontend" aria-label="Example icon-button with heart icon">
+                  <span>Agendar cita por videoconferencia</span>
+              </button>
+          </mat-list-item>
+          <mat-list-item [hidden]="role != '2'" role="listitem">
+              <button mat-button class="example-icon" routerLink="/chat-frontend" aria-label="Example icon-button with heart icon">
+                  <span>Agendar cita por chat en línea</span>
+              </button>
+          </mat-list-item>
+        
+          <mat-list-item [hidden]="role != '2'" role="listitem">
+            <button mat-button class="example-icon" routerLink="/payment" aria-label="Example icon-button with share icon">
+              <span> Registros de facturación</span>
+            </button>
+          </mat-list-item>
+          
+          <mat-list-item [hidden]="role != '1'" role="listitem">
+              <button mat-button class="example-icon" routerLink="/calendar-and-access-date" aria-label="Example icon-button with heart icon">
+                  <span>Calendario y acceso a citas</span>
+              </button>
+          </mat-list-item>
+
+          <mat-list-item [hidden]="role != '1'" role="listitem">
+              <button mat-button class="example-icon" routerLink="/video-doctor" aria-label="Example icon-button with share icon">
+                <span> Gestionar citas por videoconferencia</span>
+              </button>
+          </mat-list-item>
+
+          <mat-list-item [hidden]="role != '1'" role="listitem">
+              <button mat-button class="example-icon" routerLink="/chat-doctor" aria-label="Example icon-button with share icon">
+                <span> Gestionar citas por chat en línea</span>
+              </button>
+          </mat-list-item>
+
+          <mat-list-item [hidden]="role != '1'" role="listitem">
+            <button mat-button class="example-icon" routerLink="/payment" aria-label="Example icon-button with share icon">
+              <span> Registros de pagos recibidos</span>
+            </button>
+          </mat-list-item>
   
-                <mat-form-field class="example-full-width mb-5">
-                  <input matInput type="number" name="_age" #_age="ngModel" [(ngModel)]="age" placeholder="" required autofocus autocomplete="off">
-                  <mat-hint align="start"><strong>Edad del paciente</strong> </mat-hint>
-              </mat-form-field>
-              <br>
-               
-                <mat-form-field appearance="fill" class="example-full-width mb-5">
-                  <mat-label>Profesión</mat-label>
-                  <mat-select name="_profession" #_profession="ngModel" [(ngModel)]="profession">
-                    <mat-option *ngFor="let item of profesiones" [value]="item">
-                      {{item}}
-                    </mat-option>
-                  </mat-select>
-                  <mat-hint align="start"><strong>Profesión del médico para la cita</strong> </mat-hint>
-                </mat-form-field>
 
-                <mat-form-field appearance="fill" class="example-full-width mb-4">
-                  <mat-label>Especialidad</mat-label>
-                  <mat-select name="_specialization" #_specialization="ngModel" [(ngModel)]="specialization">
-                    <mat-option *ngFor="let item of especializaciones" [value]="item.id">
-                      {{item.tipo}}
-                    </mat-option>
-                  </mat-select>
-                  <mat-hint align="start"><strong>Especialidad del profesional para la cita</strong> </mat-hint>
-                </mat-form-field>
-              
-                  <mat-form-field class="example-full-width mb-5 mt-3">
-                    <mat-label>Comentario</mat-label>
-                    <textarea matInput placeholder="" name="_commentary" #_commentary="ngModel" [(ngModel)]="commentary"></textarea>
-                    <mat-hint align="start"><strong>Coloque información sobre la consulta</strong> </mat-hint>
-                  </mat-form-field>
-                
-              <br/><br/>
-              
-              <hr style="border: 1px solid;" >
-              <h1>Datos de pago</h1>
-              <hr style="border: 1px solid;" class="mt-5">
+          <mat-list-item role="listitem">
+              <button mat-button class="example-icon" (click)="closeSession()" aria-label="Example icon-button with share icon">
+                <span> Cerrar sesión</span>
+              </button>
+          </mat-list-item>
+        
+        </mat-list>
+  </mat-sidenav>
+    
+  <mat-sidenav-content> 
 
-              <mat-form-field class="example-full-width mb-5 mt-5">
-                <input matInput type="text" name="_number_card" #_number_card="ngModel" [(ngModel)]="number_card" placeholder="" required autofocus autocomplete="off">
-                <mat-hint align="start"><strong>Ingrese el número de su targeta</strong> </mat-hint>
-            </mat-form-field>
 
-            <br>
 
-          <mat-form-field appearance="fill" class="mb-5 example-full-width">
-            <mat-label>Elija fecha deseada</mat-label>
-            <input matInput [matDatepicker]="picker2" name="_expiration_date_card" #_expiration_date_card="ngModel" [(ngModel)]="expiration_date_card">
-            <mat-datepicker-toggle matSuffix [for]="picker2"></mat-datepicker-toggle>
-            <mat-datepicker #picker2></mat-datepicker>
-            <mat-hint align="start"><strong>Fecha de expiración de la targeta</strong> </mat-hint>
-        </mat-form-field>
-          <br>
 
-          <mat-form-field class="example-full-width mb-5">
-            <input matInput type="text" name="_to_name_card" #_to_name_card="ngModel" [(ngModel)]="to_name_card" placeholder="Dueño de la targeta" required autofocus autocomplete="off">
-            <mat-hint align="start"><strong>Dueño de la targeta</strong> </mat-hint>
-          </mat-form-field>
-          <br>
 
-          <mat-form-field class="example-full-width mb-5">
-            <input matInput type="text" name="_security_code" #_security_code="ngModel" [(ngModel)]="security_code" placeholder="" required autofocus autocomplete="off">
-            <mat-hint align="start"><strong>Ingrese código de seguridad de su targeta</strong> </mat-hint>
-          </mat-form-field>
-          <br>
 
-          <mat-form-field class="example-full-width mb-5">
-            <input matInput type="text"  disabled="disabled" name="_total" #_total="ngModel" [(ngModel)]="total"   autofocus >
-            <mat-hint align="start"><strong>Total a pagar</strong> </mat-hint>
-          </mat-form-field>
-          <br>
 
-              <div class="example-button-row">
-                  <button mat-raised-button color="primary" type="submit" style="width: 40%; margin-right: 10px;">Programar</button>
-                  
-                </div>
-              
+                          <h1 style="min-width: 650px; width: 60%; margin: 0 auto; margin-top: 4%; text-align: left;">Programar consulta para Videoconferencia</h1>
+                          <hr style="min-width: 650px; width: 60%; margin: 0 auto; margin-top: 1%; text-align: left; border: 1px solid;">
+                            <mat-card style="min-width: 650px; width: 60%; margin: 0 auto; margin-top: 2%; margin-bottom: 5%; text-align: center;">
+                                <br/>
+                            <!--  <mat-card-title style="color: black;">
+                                    <h1>Programar consulta por videoconferencia</h1>
+                                </mat-card-title> --> 
+                                <br/><br/>
+                                <mat-card-content>
+
+                                    <form class="example-form" #registervideoForm="ngForm" (ngSubmit)="registerVideo(registervideoForm)" style="margin: 0 auto; font-size: 20px;">
+
+                                        <mat-form-field appearance="fill" class="mb-5 example-full-width">
+                                            <mat-label>Elija fecha deseada</mat-label>
+                                            <input matInput  name="_date" #_date="ngModel" type="date" [(ngModel)]="date" requerid>
+                                            
+                                            <mat-hint align="start"><strong>Fecha de consulta: DD/MM/AA</strong> </mat-hint>
+                                        </mat-form-field>
+                                        <br>
+
+                                        <!--ESTE CAMPO OCULTO ES PARA LA FECHA ACTUAL-->
+
+                                        <mat-form-field hidden appearance="fill" class="mb-5 example-full-width">
+                                          <input matInput [matDatepicker]="picker3" name="_actual" #_actual="ngModel" [(ngModel)]="current_date">
+                                          <mat-datepicker-toggle matSuffix [for]="picker3"></mat-datepicker-toggle>
+                                          <mat-datepicker #picker3></mat-datepicker>
+                                      </mat-form-field>
+                                      
+                                        <mat-form-field  class="example-full-width mb-5">
+                                            <input matInput name="_start_session" #_start_session="ngModel" [(ngModel)]="start_session" placeholder="Hora de inicio" required autofocus autocomplete="off" pattern="[0-9]{2}[:]{1}[0-9]{2}">
+                                            <mat-hint align="start"><strong>Hora de inicio de consulta: ##:## (Por favor asignar 48 horas de antelación minimo y en formato militar)</strong> </mat-hint>
+                                        </mat-form-field>
+                                        <br>
+                                        
+                                          <mat-form-field appearance="fill" class="example-full-width mb-5 mt-2">
+                                            <mat-label>Duranción de la consulta</mat-label>
+                                            <mat-select name="_duration" #_duration="ngModel" [(ngModel)]="duration" (ngModelChange)="pago()" required>
+                                              <mat-option *ngFor="let item of lista" [value]="item.cantidad">
+                                                {{item.duracion}}
+                                              </mat-option>
+                                            </mat-select>
+                                            <mat-hint align="start"><strong>Tiempo de duración de la consulta</strong> </mat-hint>
+                                          </mat-form-field>
+                                          <br>
+                                          <!--
+                                        <mat-form-field class="example-full-width">
+                                            <mat-label >Ingrese link de conferencia</mat-label>
+                                            <input matInput type="text" placeholder="Ingrese link" required autofocus autocomplete="off">
+                                          </mat-form-field>  -->
+                            
+                                          <mat-form-field class="example-full-width mb-5">
+                                            <input matInput type="number" name="_age" #_age="ngModel" [(ngModel)]="age" placeholder="" min="0" max="99" required autofocus autocomplete="off" pattern="[0-9]{2}">
+                                            <mat-hint align="start"><strong>Edad del paciente</strong> </mat-hint>
+                                        </mat-form-field>
+                                        <br>
+                                        
+                                    
+
+                                          <mat-form-field appearance="fill" class="example-full-width mb-4">
+                                            <mat-label>Profesión y especialidad</mat-label>
+                                            <mat-select name="_specialization" #_specialization="ngModel" [(ngModel)]="specialization" required>
+                                              <mat-option *ngFor="let item of profession_specialization" [value]="item.id">
+                                                {{item.profession}} / {{item.specialization}}
+                                              </mat-option>
+                                            </mat-select>
+                                            <mat-hint align="start"><strong>Profesión y especialidad del doctor para la cita</strong> </mat-hint>
+                                          </mat-form-field>
+                                        
+                                            <mat-form-field class="example-full-width mb-5 mt-3">
+                                              <mat-label>Comentario</mat-label>
+                                              <textarea matInput placeholder="" name="_commentary" #_commentary="ngModel" [(ngModel)]="commentary"></textarea>
+                                              <mat-hint align="start"><strong>Coloque información sobre la consulta</strong> </mat-hint>
+                                            </mat-form-field>
+                                          
+                                        <br/><br/>
+                                        
+                                        <hr style="border: 1px solid;" >
+                                        <h1>Datos de pago</h1>
+                                        <hr style="border: 1px solid;" class="mt-5">
+
+                                        <mat-form-field class="example-full-width mb-5 mt-5">
+                                          <input matInput type="text" name="_number_card" #_number_card="ngModel" [(ngModel)]="number_card" placeholder="Número de tarjeta de crédito o débito" required autofocus autocomplete="off" pattern="[0-9]{15,16}">
+                                          <mat-hint align="start"><strong>Ingrese el número de su targeta (De 15 a 16 dígitos)</strong> </mat-hint>
+                                      </mat-form-field>
+
+                                      <br>
+
+                                    <mat-form-field appearance="fill" class="mb-5 example-full-width">
+                                      <mat-label>Fecha de expiración</mat-label>
+                                      <input matInput  name="_expiration_date_card" #_expiration_date_card="ngModel" [(ngModel)]="expiration_date_card" type="date" required>
+                                      <mat-hint align="start"><strong>Fecha de expiración de la targeta</strong> </mat-hint>
+                                  </mat-form-field>
+                                    <br>
+
+                                    <mat-form-field class="example-full-width mb-5">
+                                      <input matInput type="text" name="_to_name_card" #_to_name_card="ngModel" [(ngModel)]="to_name_card" placeholder="Dueño de la targeta" required autofocus autocomplete="off">
+                                      <mat-hint align="start"><strong>Dueño de la targeta</strong> </mat-hint>
+                                    </mat-form-field>
+                                    <br>
+
+                                    <mat-form-field class="example-full-width mb-5">
+                                      <input matInput type="text" name="_security_code" #_security_code="ngModel" [(ngModel)]="security_code" placeholder="Código de seguridad" required autofocus autocomplete="off" pattern="[0-9]{3}">
+                                      <mat-hint align="start"><strong>Ingrese código de seguridad de su targeta</strong> </mat-hint>
+                                    </mat-form-field>
+                                    <br>
+
+                                    <mat-form-field class="example-full-width mb-5">
+                                      <input matInput type="text"  disabled="disabled" name="_total" #_total="ngModel" [(ngModel)]="total"   autofocus >
+                                      <mat-hint align="start"><strong>Total a pagar</strong> </mat-hint>
+                                    </mat-form-field>
+                                    <br>
+
+                                        <div class="example-button-row">
+                                            <button [disabled]="!registervideoForm.valid" mat-raised-button color="primary" type="submit" style="width: 40%; margin-right: 10px;">Programar</button>
+                                            
+                                          </div>
+                                        
+                            
+                                    </form>
+                                    <br/>
+                                  </mat-card-content>
+                                </mat-card>
+
+
+
+
+
+
+
+
+
+    </mat-sidenav-content>
+  </mat-sidenav-container>
   
-          </form>
-          <br/>
-        </mat-card-content>
-      </mat-card>
+  <mat-toolbar class="color-purple" style="height: 215px; color: white;">
+      
+      <div class="contenedor-footer">
+          
+          <div class="container-fluid text-center text-md-left">
+          
+              <div class="row">
+          
+                  <div class="col-md-6 mt-md-0 mt-3">
+  
+                      <img src="../../../assets/logo.png" height="90px">
+  
+  
+                  </div>
+          
+                  <hr class="clearfix w-100 d-md-none pb-3">
+  
+          
+                  <div class="col-md-6 mb-md-0 mb-3">
+  
+          
+                      <button  mat-button routerLink="/politicas"  class="example-icon" aria-label="Example icon-button with share icon">
+                          <span>-Politicas del sitio</span>
+                      </button><br>
+                      <button  mat-button routerLink="/#"  class="example-icon" aria-label="Example icon-button with share icon">
+                          <span>-Preguntas Frecuentes</span>
+                      </button><br>
+                      <button  mat-button routerLink="/about-us"  class="example-icon" aria-label="Example icon-button with share icon">
+                          <span>-Acerca de nosotros</span>
+                      </button>
+                  </div>
+          
+  
+              </div>
+          
+  
+          </div>
+      </div>
+  </mat-toolbar>
   

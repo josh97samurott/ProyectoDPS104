@@ -10,6 +10,9 @@ import { Router } from '@angular/router';
   styleUrls: ['./log-in.component.css']
 })
 export class LogInComponent implements OnInit {
+  title = 'cimo';
+  access:string;
+  role:string;
 
   public username:string;
   public password:string;
@@ -19,6 +22,13 @@ export class LogInComponent implements OnInit {
 
   ngOnInit(){
     this.message = "";
+    this.access = this.service.getToken("access");
+    this.role = this.service.getToken("role");
+  }
+
+  closeSession(){
+    this.service.logOut();
+    this.router.navigate(["log-in"]);
   }
 
   logIn(loginForm: NgForm){
@@ -27,7 +37,7 @@ export class LogInComponent implements OnInit {
         this.message = "";
         this.service.setTokenLogin(result["id"],result["username"], result["name"], result["lastname"], result["email"], result["role"], result["access"]);
         if(result["role"] == 0){
-          window.location.href = "/principalpage";
+          this.router.navigate(['principalpage']);
         }else if(result["role"] == 1){
           window.location.href = "/principalpage";
         }else if(result["role"] == 2){

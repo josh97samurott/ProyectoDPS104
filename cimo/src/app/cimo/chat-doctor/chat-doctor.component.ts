@@ -3,6 +3,7 @@ import {MatPaginator} from '@angular/material/paginator';
 import {MatTableDataSource} from '@angular/material/table';
 import { ServiceService } from '../../Service/service.service';
 import {animate, state, style, transition, trigger} from '@angular/animations';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-chat-doctor',
@@ -17,6 +18,9 @@ import {animate, state, style, transition, trigger} from '@angular/animations';
   ],
 })
 export class ChatDoctorComponent implements AfterViewInit {
+  title = 'cimo';
+  access:string;
+  role:string;
 
   datos=null;
   link_meeting:string;
@@ -29,7 +33,7 @@ export class ChatDoctorComponent implements AfterViewInit {
 
   @ViewChild(MatPaginator) paginator: MatPaginator;
 
-  constructor(private service:ServiceService) { }
+  constructor(private service:ServiceService, private router:Router) { }
 
   ngAfterViewInit() {
     //this.dataSource.paginator = this.paginator;
@@ -37,7 +41,13 @@ export class ChatDoctorComponent implements AfterViewInit {
 
   ngOnInit(): void {
     this.recovery_data();
-    
+    this.access = this.service.getToken("access");
+    this.role = this.service.getToken("role");
+  }
+
+  closeSession(){
+    this.service.logOut();
+    this.router.navigate(["log-in"]);
   }
 
   recovery_data(){
@@ -65,6 +75,7 @@ export class ChatDoctorComponent implements AfterViewInit {
         
       }
       else{
+
         alert("Hubo un problema, por favor intentelo de nuevo.");
       }
     });

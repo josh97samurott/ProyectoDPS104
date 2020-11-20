@@ -1,4 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+import { ServiceService } from '../../app/Service/service.service';
+import { HttpClient } from '@angular/common/http';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-error-control',
@@ -6,10 +9,22 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./error-control.component.css']
 })
 export class ErrorControlComponent implements OnInit {
+  title = 'cimo';
+  access:string;
+  role:string;
 
-  constructor() { }
-
-  ngOnInit(): void {
+  constructor(private service:ServiceService, private router:Router) {
   }
+
+  ngOnInit() {
+    this.access = this.service.getToken("access");
+    this.role = this.service.getToken("role");
+  }
+
+  closeSession(){
+    this.service.logOut();
+    this.router.navigate(["log-in"]);
+  }
+
 
 }

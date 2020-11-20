@@ -10,6 +10,10 @@ import { Router } from '@angular/router';
   styleUrls: ['./chatfrontend.component.css']
 })
 export class ChatfrontendComponent implements OnInit {
+  title = 'cimo';
+  access:string;
+  role:string;
+
 
   current_date=new Date();
 
@@ -29,6 +33,7 @@ export class ChatfrontendComponent implements OnInit {
   security_code:number;
   total:number;
 
+  profession_specialization;
 
   lista:any=[
     {duracion:"30 minutos", cantidad:30},
@@ -48,6 +53,14 @@ export class ChatfrontendComponent implements OnInit {
 
   ngOnInit(): void {
     this.total=0;
+    this.access = this.service.getToken("access");
+    this.role = this.service.getToken("role");
+    this.service.get_profession().subscribe(result => { this.profession_specialization = result });
+  }
+
+  closeSession(){
+    this.service.logOut();
+    this.router.navigate(["log-in"]);
   }
 
   registerChat(registervideoForm: NgForm){
@@ -116,6 +129,10 @@ export class ChatfrontendComponent implements OnInit {
     this.security_code=null;
     this.total=0;
 
+  }
+
+  pago(){
+    this.total = this.duration;
   }
 
 }

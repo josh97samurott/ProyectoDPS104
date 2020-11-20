@@ -12,6 +12,11 @@ import { Router } from '@angular/router';
   styleUrls: ['./videoconferencefrontend.component.css']
 })
 export class VideoconferencefrontendComponent implements OnInit {
+  title = 'cimo';
+  access:string;
+  role:string;
+
+
 
   current_date=new Date();
 
@@ -31,6 +36,7 @@ export class VideoconferencefrontendComponent implements OnInit {
   security_code:number;
   total:number;
 
+  profession_specialization;
 
 
   lista:any=[
@@ -52,6 +58,14 @@ export class VideoconferencefrontendComponent implements OnInit {
 
   ngOnInit(): void {
     this.total=0;
+    this.access = this.service.getToken("access");
+    this.role = this.service.getToken("role");
+    this.service.get_profession().subscribe(result => { this.profession_specialization = result });
+  }
+
+  closeSession(){
+    this.service.logOut();
+    this.router.navigate(["log-in"]);
   }
 
 
@@ -128,8 +142,7 @@ export class VideoconferencefrontendComponent implements OnInit {
   }
 
   pago(){
-
-
+    this.total = this.duration;
   }
   
   

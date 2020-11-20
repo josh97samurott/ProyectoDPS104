@@ -2,6 +2,10 @@ import { Component, OnInit } from '@angular/core';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {MatDialog, MatDialogRef, MAT_DIALOG_DATA} from '@angular/material/dialog';
 import { DialogComponent } from './dialog/dialog.component';
+import { ServiceService } from '../../app/Service/service.service';
+import { HttpClient } from '@angular/common/http';
+import { Router } from '@angular/router';
+
 
 
 
@@ -61,6 +65,10 @@ export interface DialogData{
 })
 
 export class  PayrollComponent  implements OnInit {
+  title = 'cimo';
+  access:string;
+  role:string;
+
   animal: string;
   name: string;
 
@@ -73,7 +81,7 @@ export class  PayrollComponent  implements OnInit {
   dataDoctores = ELEMENT_DATA_DOCTOR;
   dataAdministrativos = ELEMENT_DATA_ADMINISTRATIVO;
 
-  constructor(public dialog: MatDialog) {}
+  constructor(public dialog: MatDialog, private service:ServiceService, private router:Router) {}
 
   openDialog() {
     const dialogRef = this.dialog.open(DialogComponent);
@@ -83,7 +91,13 @@ export class  PayrollComponent  implements OnInit {
     });
   }
   ngOnInit() {
+    this.access = this.service.getToken("access");
+    this.role = this.service.getToken("role");
+  }
 
+  closeSession(){
+    this.service.logOut();
+    this.router.navigate(["log-in"]);
   }
 }
 

@@ -1,10 +1,153 @@
+<mat-toolbar class="color-purple" style="height: 100px; color: white;">
+    <button [hidden]="access!='1'" mat-icon-button class="example-icon" (click)="sidenav.toggle()" aria-label="Example icon-button with menu icon">
+        <mat-icon>menu</mat-icon>
+    </button>
+
+    <span style="margin-top: 0.5%;"><img src="../../../assets/logo.png" height="90px"></span>
+    <span class="example-spacer"></span>
+    <button mat-button class="example-icon" routerLink="/principalpage" aria-label="Example icon-button with heart icon">
+        <span>Inicio</span>
+    </button>
+    <button [hidden]="access == '1'" mat-button class="example-icon" routerLink="/log-in" aria-label="Example icon-button with heart icon">
+        <span>Iniciar sesión</span>
+    </button>
+    <button [hidden]="access == '1'" mat-button routerLink="/sign-up"  class="example-icon" aria-label="Example icon-button with share icon">
+        <span>Registrarse</span>
+    </button>
+    <button mat-button class="example-icon" routerLink="/services-info" aria-label="Example icon-button with share icon">
+        <span>Servicios</span>
+    </button>
+    <button mat-button class="example-icon" routerLink="/about-us" aria-label="Example icon-button with share icon">
+        <span>Acerca de nosotros</span>
+    </button>
+</mat-toolbar>
+
+
+<mat-sidenav-container style="height: 89.7%; background-color: #D6E8EE;">
+    <mat-sidenav #sidenav mode="side" style="background-color: #00416d;" > 
+        <mat-list role="list">
+            <h2 style="text-align: center; padding-top: 20px;">Menú de navegación</h2>
+            <hr>
+            <mat-list-item role="listitem">
+              <button mat-button class="example-icon" routerLink="/dashboard" aria-label="Example icon-button with heart icon">
+                <span>Mi información de usuario</span>
+              </button>
+            </mat-list-item>
+            
+            <mat-list-item [hidden]="role != '0'" role="listitem">
+                <button mat-button class="example-icon" routerLink="/users" aria-label="Example icon-button with heart icon">
+                    <span>Usuarios del sistema</span>
+                </button>
+            </mat-list-item>
+
+            <mat-list-item [hidden]="role != '0'" role="listitem">
+                <button mat-button class="example-icon" routerLink="/managment-videoconferences" aria-label="Example icon-button with heart icon">
+                    <span>Gestión de citas médicas por videoconferencia</span>
+                </button>
+            </mat-list-item>
+
+            <mat-list-item [hidden]="role != '0'" role="listitem">
+                <button mat-button class="example-icon" routerLink="/managment-chat" aria-label="Example icon-button with heart icon">
+                    <span>Gestión de citas médicas por chat en línea</span>
+                </button>
+            </mat-list-item>
+
+            <mat-list-item [hidden]="role != '0'" role="listitem">
+                <button mat-button class="example-icon" routerLink="/payroll" aria-label="Example icon-button with heart icon">
+                    <span>Planilla de pagos</span>
+                </button>
+            </mat-list-item>
+            
+            <mat-list-item [hidden]="role != '0'" role="listitem">
+                <button mat-button class="example-icon" routerLink="/statistical" aria-label="Example icon-button with heart icon">
+                    <span>Módulo estadístico</span>
+                </button>
+            </mat-list-item>
+
+            <mat-list-item [hidden]="role != '0'" role="listitem">
+                <button mat-button class="example-icon" routerLink="/error-control" aria-label="Example icon-button with heart icon">
+                    <span>Control de errores del sistema</span>
+                </button>
+            </mat-list-item>
+
+            <mat-list-item [hidden]="role != '2'" role="listitem">
+                <button mat-button class="example-icon" routerLink="/calendar-and-access-date" aria-label="Example icon-button with heart icon">
+                    <span>Calendario y acceso a citas</span>
+                </button>
+            </mat-list-item>
+            <mat-list-item [hidden]="role != '2'" role="listitem">
+                <button mat-button class="example-icon" routerLink="/videoconferences-frontend" aria-label="Example icon-button with heart icon">
+                    <span>Agendar cita por videoconferencia</span>
+                </button>
+            </mat-list-item>
+            <mat-list-item [hidden]="role != '2'" role="listitem">
+                <button mat-button class="example-icon" routerLink="/chat-frontend" aria-label="Example icon-button with heart icon">
+                    <span>Agendar cita por chat en línea</span>
+                </button>
+            </mat-list-item>
+          
+            <mat-list-item [hidden]="role != '2'" role="listitem">
+              <button mat-button class="example-icon" routerLink="/payment" aria-label="Example icon-button with share icon">
+                <span> Registros de facturación</span>
+              </button>
+            </mat-list-item>
+            
+            <mat-list-item [hidden]="role != '1'" role="listitem">
+                <button mat-button class="example-icon" routerLink="/calendar-and-access-date" aria-label="Example icon-button with heart icon">
+                    <span>Calendario y acceso a citas</span>
+                </button>
+            </mat-list-item>
+
+            <mat-list-item [hidden]="role != '1'" role="listitem">
+                <button mat-button class="example-icon" routerLink="/video-doctor" aria-label="Example icon-button with share icon">
+                  <span> Gestionar citas por videoconferencia</span>
+                </button>
+            </mat-list-item>
+
+            <mat-list-item [hidden]="role != '1'" role="listitem">
+                <button mat-button class="example-icon" routerLink="/chat-doctor" aria-label="Example icon-button with share icon">
+                  <span> Gestionar citas por chat en línea</span>
+                </button>
+            </mat-list-item>
+
+            <mat-list-item [hidden]="role != '1'" role="listitem">
+              <button mat-button class="example-icon" routerLink="/payment" aria-label="Example icon-button with share icon">
+                <span> Registros de pagos recibidos</span>
+              </button>
+            </mat-list-item>
+    
+
+            <mat-list-item role="listitem">
+                <button mat-button class="example-icon" (click)="closeSession()" aria-label="Example icon-button with share icon">
+                  <span> Cerrar sesión</span>
+                </button>
+            </mat-list-item>
+          
+          </mat-list>
+    </mat-sidenav>
+      
+    <mat-sidenav-content> 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 <div class="container">
     <br>
     <br>
-    <h1 style="text-align: center;">Politicas del sitio</h1>
+    <h1 style="text-align: center; color: black">Politicas del sitio</h1>
     <hr >
     <br>
-    <h2>Políticas de uso y privacidad</h2>
+    <h2 style="color: black;">Políticas de uso y privacidad</h2>
     <p>
         La empresa encargada del desarrollo de CIMO, a través de la Dirección de la organización mundial de la salud (OMS) y el ministerio de trabajo y de salud, pone a disposición de las personas que visiten este sitio web (Usuarios), este documento que contiene las Políticas de uso y privacidad en la cual se mencionan normas generales de utilización y de protección a la información que pueda proporcionar, su uso, forma de recopilación y divulgación, así como también, derechos de los Usuarios.
     </p>
@@ -15,7 +158,7 @@
     El Sitio Web, mediante el navegador que los Usuarios utilicen, puede llegar a obtener información anónima como la dirección del protocolo de internet (IP), versión de navegador, dispositivo utilizado, etc. Cuando se envía la información de los Usuarios, la Universidad queda facultada de utilizarla para los fines que considere convenientes, actuando siempre bajo el marco de la legalidad y respetando la seguridad y privacidad de la información.
     </p>
     <br>
-    <h2>Aspectos generales</h2>
+    <h2 style="color: black;">Aspectos generales</h2>
     <p>
         
     La información que los Usuarios proporcionan a través de los formularios presentes en nuestro Sitio Web y en los diversos servicios que se ofrezcan bajo el dominio [cimo], son procesados y almacenados en los servidores de la Universidad, amparados en el marco legal y en el presente documento. La Universidad cumple con estándares de seguridad y privacidad que garantizan la integridad de la información proporcionada por los Usuarios en todo momento, desde que los datos se ingresan en el sitio web, hasta que son almacenados en nuestras bases de datos. Es importante mencionar que dentro del sitio, los Usuarios pueden encontrar enlaces a páginas externas fuera del dominio [cimo]. En estos casos, será responsabilidad de los Usuarios verificar las políticas de uso y privacidad de aquellos sitios web, y en ningún momento formarán parte de las políticas aquí descritas.
@@ -33,8 +176,71 @@
         </li>
       </ul>
       <br>
-    <h2>Responsabilidad de los Usuarios respecto a sus cuentas</h2>
+    <h2 style="color: black;">Responsabilidad de los Usuarios respecto a sus cuentas</h2>
     <p>
         Es responsabilidad única de los Usuarios mantener la confidencialidad de su cuenta, restringiendo el acceso a los dispositivos vinculados a ella, resguardando su contraseña con seguridad o no compartiéndola con terceros.
     </p>
 </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</mat-sidenav-content>
+</mat-sidenav-container>
+
+<mat-toolbar class="color-purple" style="height: 215px; color: white;">
+    
+    <div class="contenedor-footer">
+        
+        <div class="container-fluid text-center text-md-left">
+        
+            <div class="row">
+        
+                <div class="col-md-6 mt-md-0 mt-3">
+
+                    <img src="../../../assets/logo.png" height="90px">
+
+
+                </div>
+        
+                <hr class="clearfix w-100 d-md-none pb-3">
+
+        
+                <div class="col-md-6 mb-md-0 mb-3">
+
+        
+                    <button  mat-button routerLink="/politicas"  class="example-icon" aria-label="Example icon-button with share icon">
+                        <span>-Politicas del sitio</span>
+                    </button><br>
+                    <button  mat-button routerLink="/#"  class="example-icon" aria-label="Example icon-button with share icon">
+                        <span>-Preguntas Frecuentes</span>
+                    </button><br>
+                   
+                    <button  mat-button routerLink="/about-us"  class="example-icon" aria-label="Example icon-button with share icon">
+                        <span>-Acerca de nosotros</span>
+                    </button>
+                </div>
+        
+
+            </div>
+        
+
+        </div>
+    </div>
+</mat-toolbar>

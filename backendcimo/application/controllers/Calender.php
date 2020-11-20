@@ -16,9 +16,10 @@ class Calender extends CI_Controller {
 		$dataObject = json_decode($JSONData);
         
         $id_user = $dataObject->id_user;
+        $role = $dataObject->role;
 		
 
-                $datos=$this->Calender_model->getcalender($id_user);
+                $datos=$this->Calender_model->getcalender($id_user, $role);
                 $data["json"] = $datos;
 
 				$this->load->view("backend/json_calender.php", $data);

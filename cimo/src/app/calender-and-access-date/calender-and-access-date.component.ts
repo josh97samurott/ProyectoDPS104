@@ -3,6 +3,7 @@ import {MatPaginator} from '@angular/material/paginator';
 import {MatTableDataSource} from '@angular/material/table';
 import { ServiceService } from '../Service/service.service';
 import {animate, state, style, transition, trigger} from '@angular/animations';
+import { Router } from '@angular/router';
 /*import {
   Component,
   ChangeDetectionStrategy,
@@ -57,7 +58,9 @@ const colors: any = {
   ],
 })
 export class CalenderAndAccessDateComponent implements AfterViewInit{
-
+  title = 'cimo';
+  access:string;
+  role:string;
 
   datos=null;
 
@@ -68,21 +71,28 @@ export class CalenderAndAccessDateComponent implements AfterViewInit{
 
   @ViewChild(MatPaginator) paginator: MatPaginator;
 
-  constructor(private service:ServiceService) { }
-
+  constructor(private service:ServiceService, private router:Router) { }
+  
   ngAfterViewInit() {
     //this.dataSource.paginator = this.paginator;
   }
 
   ngOnInit(): void {
     this.recovery_data();
-    
+    this.access = this.service.getToken("access");
+    this.role = this.service.getToken("role");
+  }
+
+  closeSession(){
+    this.service.logOut();
+    this.router.navigate(["log-in"]);
   }
 
   recovery_data(){
 
     var datos={
       id_user:this.service.getToken('id'),
+      role:this.service.getToken("role")
     }
 
     this.service.calender(datos).subscribe(result =>{

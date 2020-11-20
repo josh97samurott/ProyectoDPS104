@@ -50,19 +50,35 @@ class User_info extends CI_Controller {
 		$phone = $dataObject->phone;
 		$nationality = $dataObject->nationality;
 		$dui_or_passport = $dataObject->dui_or_passport;
-		
+		$password = $dataObject->password;
 		
 			if(isset($id)==true && isset($username)==true  && isset($name)==true && isset($lastname)==true && isset($email)==true && isset($nationality)==true){
-				$datos = array(
-					"id" => $id,
-					"username" => $username,
-					"name" => $name,
-					"lastname" => $lastname,
-					"email" => $email,
-					"phone" => $phone,
-					"nationality" => $nationality,
-					"dui_or_passport" => $dui_or_passport,
-				);
+				if($password == "" || $password == null){
+					$datos = array(
+						"id" => $id,
+						"username" => $username,
+						"name" => $name,
+						"lastname" => $lastname,
+						"email" => $email,
+						"phone" => $phone,
+						"nationality" => $nationality,
+						"dui_or_passport" => $dui_or_passport
+					);
+				}
+				else{
+					$datos = array(
+						"id" => $id,
+						"username" => $username,
+						"name" => $name,
+						"lastname" => $lastname,
+						"email" => $email,
+						"phone" => $phone,
+						"nationality" => $nationality,
+						"dui_or_passport" => $dui_or_passport,
+						"password" => md5($password)
+					);
+				}
+				
 
 				if($this->User_model->update_user($datos)){
 					$data["json"] = array(

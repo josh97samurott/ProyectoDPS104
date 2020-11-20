@@ -37,14 +37,25 @@ export class SignUpComponent implements OnInit {
   profession_specialization_select;
 
   constructor(private service:ServiceService, private router:Router) { }
+  title = 'cimo';
+  access:string;
+  role:string;
+
 
   ngOnInit(): void {  
+    this.access = this.service.getToken("access");
+    this.role = this.service.getToken("role");
     this.message = "";
     this.message2 = "";
     this.message3 = "";
     this.message4 = "";
     this.message5 = "";
     this.service.get_profession().subscribe(result => { this.profession_specialization = result });
+  }
+
+  closeSession(){
+    this.service.logOut();
+    this.router.navigate(["log-in"]);
   }
 
   registerPacient(registerpacientForm: NgForm){
@@ -60,6 +71,10 @@ export class SignUpComponent implements OnInit {
         phone: this.phone,
         nationality: this.nationality,
         dui_or_passport: null
+      }
+
+      if(data.phone == null || data.phone == ""){
+        data.phone = "";
       }
   
       this.service.signup(data).subscribe(result => {

@@ -1,3 +1,4 @@
+<!--
 <mat-toolbar class="color-purple" style="height: 100px; color: white;">
     <button [hidden]="access!='1'" mat-icon-button class="example-icon" (click)="sidenav.toggle()" aria-label="Example icon-button with menu icon">
         <mat-icon>menu</mat-icon>
@@ -34,7 +35,6 @@
               </button>
             </mat-list-item>
             
-            <!-- Opciones de menú de administradores-->
             <mat-list-item [hidden]="role != '0'" role="listitem">
                 <button mat-button class="example-icon" routerLink="/users" aria-label="Example icon-button with heart icon">
                     <span>Usuarios del sistema</span>
@@ -71,7 +71,6 @@
                 </button>
             </mat-list-item>
 
-            <!--Opciones de menú de pacientes-->
             <mat-list-item [hidden]="role != '2'" role="listitem">
                 <button mat-button class="example-icon" routerLink="/calendar-and-access-date" aria-label="Example icon-button with heart icon">
                     <span>Calendario y acceso a citas</span>
@@ -94,7 +93,6 @@
               </button>
             </mat-list-item>
             
-            <!-- opciones de menú de doctores-->
             <mat-list-item [hidden]="role != '1'" role="listitem">
                 <button mat-button class="example-icon" routerLink="/calendar-and-access-date" aria-label="Example icon-button with heart icon">
                     <span>Calendario y acceso a citas</span>
@@ -118,11 +116,7 @@
                 <span> Registros de pagos recibidos</span>
               </button>
             </mat-list-item>
-
-
-            <!-- Opciones de menú del administrador-->
-            
-
+    
 
             <mat-list-item role="listitem">
                 <button mat-button class="example-icon" (click)="closeSession()" aria-label="Example icon-button with share icon">
@@ -133,32 +127,37 @@
           </mat-list>
     </mat-sidenav>
       
-    <mat-sidenav-content>      
+    <mat-sidenav-content> 
+
+    -->
+
         <router-outlet></router-outlet>
+
+<!--
     </mat-sidenav-content>
 </mat-sidenav-container>
 
 <mat-toolbar class="color-purple" style="height: 215px; color: white;">
     
     <div class="contenedor-footer">
-        <!-- Footer Text -->
+        
         <div class="container-fluid text-center text-md-left">
-            <!-- Grid row -->
+        
             <div class="row">
-                <!-- Grid column -->
+        
                 <div class="col-md-6 mt-md-0 mt-3">
 
                     <img src="../../../assets/logo.png" height="90px">
 
 
                 </div>
-                <!-- Grid column -->
+        
                 <hr class="clearfix w-100 d-md-none pb-3">
 
-                <!-- Grid column -->
+        
                 <div class="col-md-6 mb-md-0 mb-3">
 
-                    <!-- Content -->
+        
                     <button  mat-button routerLink="/politicas"  class="example-icon" aria-label="Example icon-button with share icon">
                         <span>-Politicas del sitio</span>
                     </button><br>
@@ -172,11 +171,13 @@
                         <span>-Acerca de nosotros</span>
                     </button>
                 </div>
-                <!-- end Grid column -->
+        
 
             </div>
-            <!-- end Row -->
+        
 
         </div>
     </div>
 </mat-toolbar>
+
+-->

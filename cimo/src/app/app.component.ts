@@ -13,7 +13,8 @@ export class AppComponent implements OnInit {
   access:string;
   role:string;
 
-  constructor(private service:ServiceService, private router:Router) { }
+  constructor(private service:ServiceService, private router:Router) {
+  }
 
   ngOnInit() {
     this.access = this.service.getToken("access");
@@ -22,7 +23,7 @@ export class AppComponent implements OnInit {
 
   closeSession(){
     this.service.logOut();
-    window.location.href = "/log-in";
+    this.router.navigate(["log-in"]);
   }
 
 

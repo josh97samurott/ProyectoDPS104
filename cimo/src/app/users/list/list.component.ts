@@ -4,6 +4,7 @@ import {MatTableDataSource} from '@angular/material/table';
 import {ServiceService} from '../../Service/service.service';
 import {animate, state, style, transition, trigger} from '@angular/animations';
 import { NgForm } from '@angular/forms';
+import { Router } from '@angular/router';
 
 
 @Component({
@@ -19,6 +20,12 @@ import { NgForm } from '@angular/forms';
   ],
 })
 export class ListComponent implements AfterViewInit {
+  title = 'cimo';
+  access:string;
+  role_menu:string;
+
+
+
   //Campos de ingreso o modificación de usuario
   id;
   username;
@@ -62,7 +69,7 @@ export class ListComponent implements AfterViewInit {
   displayedColumnsAdministrators: string[] = ['id', 'username','name','lastname','email'];
   
   
-  constructor(private service:ServiceService) { }
+  constructor(private service:ServiceService, private router:Router) { }
 
   @ViewChild(MatSort) sort: MatSort;
 
@@ -83,13 +90,16 @@ export class ListComponent implements AfterViewInit {
     this.dui_or_passport = "";
     this.creation_date = "";
     this.confirm_email = "";
-    this.confirm_email = "";
+    this.confirm_info = "";
     this.observation = "";
     this.id_profession_specialization = null;
     this.id_doctor_information = null;
   }
 
   ngOnInit(): void {
+    this.access = this.service.getToken("access");
+    this.role_menu = this.service.getToken("role");
+
     this.edit = false;
     this.setVarInit();
     this.service.get_users_pacients().subscribe(result => {this.userspacients = result});
@@ -97,6 +107,12 @@ export class ListComponent implements AfterViewInit {
     this.service.get_users_administrators().subscribe(result => {this.usersadministrators = result});
     this.service.get_profession().subscribe(result => { this.profession_specialization = result });
   }
+
+  closeSession(){
+    this.service.logOut();
+    this.router.navigate(["log-in"]);
+  }
+
 
   actionForm(dataForm?: NgForm){
       this.message_delete = "";
